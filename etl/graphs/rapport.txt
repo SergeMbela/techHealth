@@ -1,0 +1,10 @@
+Objectif du rapport
+Nombre total de patients
+
+Nombre de patients vaccinés vs non vaccinés
+
+Taux de positivité à la grippe chez les vaccinés / non vaccinés
+
+Répartition des cas positifs par mois
+
+Graphique de comparaison
