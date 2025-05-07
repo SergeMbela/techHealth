@@ -73,6 +73,8 @@ Démarrage du Projet
 Créez une base de données et les tables nécessaires pour stocker les données des patients, des résultats cliniques et des données climatiques/pollution.
 
 Vous pouvez trouver les scripts SQL dans le dossier /sql pour configurer les tables et insérer des données fictives.
+Les sources de données: patients, villes et temperatures se situent dans le repertoire 'etl' et les scripts à executer en python sont déjà présents: sous forme de fichier .py ou ipynb)
+
 
 2. Exécution du code Python
 Assurez-vous que l'environnement Anaconda est activé.
