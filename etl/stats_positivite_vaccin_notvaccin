@@ -1,0 +1,81 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
+
+# Chargement de la connexion
+load_dotenv(override=True)
+server = os.getenv("DB_SERVER")
+database = os.getenv("DB_NAME")
+username = os.getenv("DB_USERNAME")
+password = os.getenv("DB_PASSWORD")
+
+connection_string = (
+    f"mssql+pyodbc://{username}:{password}@{server}/{database}"
+    "?driver=ODBC+Driver+18+for+SQL+Server"
+    "&Encrypt=no&TrustServerCertificate=yes"
+)
+
+engine = create_engine(connection_string)
+
+# 1. Charger les données fusionnées
+query = """
+SELECT 
+    ps.patient_id,
+    ps.date_analyse,
+    ps.positif_grippe,
+    CASE WHEN v.patient_id IS NOT NULL THEN 1 ELSE 0 END AS est_vaccine
+FROM prises_sang ps
+LEFT JOIN vaccinations_grippe v ON ps.patient_id = v.patient_id
+"""
+
+df = pd.read_sql(query, engine)
+
+# 2. Statistiques générales
+total_patients = df['patient_id'].nunique()
+total_tests = len(df)
+total_positifs = df['positif_grippe'].sum()
+taux_global = total_positifs / total_tests
+
+# 3. Positifs par statut vaccinal
+positif_par_vaccin = df.groupby("est_vaccine")["positif_grippe"].agg(["count", "sum"])
+positif_par_vaccin["taux_positif"] = positif_par_vaccin["sum"] / positif_par_vaccin["count"]
+positif_par_vaccin.index = positif_par_vaccin.index.map({0: "Non vacciné", 1: "Vacciné"})
+
+# 4. Positifs par mois
+df['mois'] = pd.to_datetime(df['date_analyse']).dt.month
+positifs_par_mois = df.groupby("mois")["positif_grippe"].sum()
+
+# 5. Affichage console
+print("📊 Rapport Statistique - Surveillance Grippe 2024")
+print(f"Nombre total de patients : {total_patients}")
+print(f"Nombre total de tests : {total_tests}")
+print(f"Taux global de positivité : {taux_global:.2%}")
+print("\nTaux de positivité selon vaccination :")
+print(positif_par_vaccin)
+
+# 6. Graphique taux vaccinés vs non vaccinés
+plt.figure(figsize=(6, 4))
+positif_par_vaccin["taux_positif"].plot(kind="bar", color=["red", "green"])
+plt.title("Taux de grippe - Vaccinés vs Non Vaccinés")
+plt.ylabel("Taux de positivité")
+plt.ylim(0, 1)
+plt.xticks(rotation=0)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+
+# 7. Graphique cas par mois
+plt.figure(figsize=(8, 4))
+positifs_par_mois.plot(kind="bar", color="skyblue")
+plt.title("Cas positifs à la grippe par mois")
+plt.xlabel("Mois")
+plt.ylabel("Nombre de cas positifs")
+plt.xticks(ticks=range(0, 12), labels=[
+    "Jan", "Fév", "Mars", "Avr", "Mai", "Juin",
+    "Juil", "Août", "Sept", "Oct", "Nov", "Déc"
+], rotation=45)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
