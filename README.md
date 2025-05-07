@@ -32,3 +32,66 @@ Ce projet vise à analyser l'efficacité d'un nouveau traitement contre la gripp
   ```bash
   docker pull mcr.microsoft.com/mssql/server:2019-latest
   docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=VotreMotDePasse' -p 1433:1433 --name sql_server_container -d mcr.microsoft.com/mssql/server:2019-latest
+
+  2. Configurer WSL et Ubuntu
+Suivez ce guide officiel pour installer WSL et Ubuntu.
+
+Ouvrir Ubuntu via WSL et installer les dépendances nécessaires :
+sudo apt update
+sudo apt install python3-pip
+sudo apt install python3-dev
+
+3. Installer Anaconda
+Si vous n'avez pas déjà Anaconda installé, vous pouvez l'installer via ce lien : Anaconda.
+
+Pour vérifier l'installation d'Anaconda, exécutez :
+conda --version
+
+4. Créer et Activer l'Environnement Conda
+Clonez ce dépôt et créez un environnement Anaconda à partir du fichier environment.yml fourni.
+
+git clone https://github.com/votre-compte/projet-grippe.git
+cd projet-grippe
+conda env create -f environment.yml
+conda activate grippe-env
+
+git clone https://github.com/votre-compte/projet-grippe.git
+cd projet-grippe
+conda env create -f environment.yml
+conda activate grippe-env
+
+5. Configurer SQL Server Management Studio
+Téléchargez et installez SQL Server Management Studio (SSMS) pour gérer la base de données.
+
+6. Power BI
+Télécharger et installer Power BI Desktop.
+
+Connectez Power BI à SQL Server pour visualiser les résultats de l'analyse.
+
+Démarrage du Projet
+1. Base de données SQL Server
+Créez une base de données et les tables nécessaires pour stocker les données des patients, des résultats cliniques et des données climatiques/pollution.
+
+Vous pouvez trouver les scripts SQL dans le dossier /sql pour configurer les tables et insérer des données fictives.
+
+2. Exécution du code Python
+Assurez-vous que l'environnement Anaconda est activé.
+
+Vous pouvez ensuite exécuter les scripts Python pour nettoyer et analyser les données.
+
+python analyse.py
+
+Contribution
+Si vous souhaitez contribuer à ce projet, vous pouvez fork le dépôt, créer une branche, puis soumettre une pull request.
+
+Étapes pour contribuer :
+Fork ce dépôt.
+
+Clonez votre fork sur votre machine locale.
+
+Créez une nouvelle branche.
+
+Apportez vos modifications et commit.
+
+Soumettez une pull request avec une description détaillée des changements.
+
