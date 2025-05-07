@@ -1,0 +1,31 @@
+{
+  "build": "h4852527_2",
+  "build_number": 2,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "libstdcxx 14.2.0 h8f9b012_2"
+  ],
+  "extracted_package_dir": "/home/sergembela/anaconda3/pkgs/libstdcxx-ng-14.2.0-h4852527_2",
+  "files": [],
+  "fn": "libstdcxx-ng-14.2.0-h4852527_2.conda",
+  "license": "GPL-3.0-only WITH GCC-exception-3.1",
+  "link": {
+    "source": "/home/sergembela/anaconda3/pkgs/libstdcxx-ng-14.2.0-h4852527_2",
+    "type": 1
+  },
+  "md5": "c75da67f045c2627f59e6fcb5f4e3a9b",
+  "name": "libstdcxx-ng",
+  "package_tarball_full_path": "/home/sergembela/anaconda3/pkgs/libstdcxx-ng-14.2.0-h4852527_2.conda",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "e86f38b007cf97cc2c67cd519f2de12a313c4ee3f5ef11652ad08932a5e34189",
+  "size": 53830,
+  "subdir": "linux-64",
+  "timestamp": 1740240722000,
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/libstdcxx-ng-14.2.0-h4852527_2.conda",
+  "version": "14.2.0"
+}

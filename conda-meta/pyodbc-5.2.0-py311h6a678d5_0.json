@@ -1,0 +1,116 @@
+{
+  "build": "py311h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://conda.anaconda.org/anaconda/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "python >=3.11,<3.12.0a0",
+    "unixodbc >=2.3.11,<2.4.0a0"
+  ],
+  "extracted_package_dir": "/home/sergembela/anaconda3/pkgs/pyodbc-5.2.0-py311h6a678d5_0",
+  "files": [
+    "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/INSTALLER",
+    "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/LICENSE.txt",
+    "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/METADATA",
+    "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/RECORD",
+    "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/REQUESTED",
+    "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/WHEEL",
+    "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/direct_url.json",
+    "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/top_level.txt",
+    "lib/python3.11/site-packages/pyodbc.cpython-311-x86_64-linux-gnu.so",
+    "lib/python3.11/site-packages/pyodbc.pyi"
+  ],
+  "fn": "pyodbc-5.2.0-py311h6a678d5_0.tar.bz2",
+  "license": "MIT-0",
+  "link": {
+    "source": "/home/sergembela/anaconda3/pkgs/pyodbc-5.2.0-py311h6a678d5_0",
+    "type": 1
+  },
+  "md5": "5e659439f64b04ae7ba310929211ed13",
+  "name": "pyodbc",
+  "package_tarball_full_path": "/home/sergembela/anaconda3/pkgs/pyodbc-5.2.0-py311h6a678d5_0.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/LICENSE.txt",
+        "path_type": "hardlink",
+        "sha256": "9859c85770c91b7866b0f769c938e36d64d0260141b529b947b4ead96883eab4",
+        "sha256_in_prefix": "9859c85770c91b7866b0f769c938e36d64d0260141b529b947b4ead96883eab4",
+        "size_in_bytes": 868
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "0923e7d459c9a19c100abe6a6a100c8e5a0921e55816c763b5200cc692d91d55",
+        "sha256_in_prefix": "0923e7d459c9a19c100abe6a6a100c8e5a0921e55816c763b5200cc692d91d55",
+        "size_in_bytes": 2742
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "14f36a894cbb3c99c9854c2b469b22da3c68229ae8355c3e6fc859395221493d",
+        "sha256_in_prefix": "14f36a894cbb3c99c9854c2b469b22da3c68229ae8355c3e6fc859395221493d",
+        "size_in_bytes": 824
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "6b5274ddb54ad0f24b0f8615329a881cc441a42704e389649cdc803bf22d4c51",
+        "sha256_in_prefix": "6b5274ddb54ad0f24b0f8615329a881cc441a42704e389649cdc803bf22d4c51",
+        "size_in_bytes": 104
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "316bf55b1b6feaba57f25645845977782e9ec2e3c6d37baba55e52f34e84b638",
+        "sha256_in_prefix": "316bf55b1b6feaba57f25645845977782e9ec2e3c6d37baba55e52f34e84b638",
+        "size_in_bytes": 66
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc-5.2.0.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "45bebdbd2f9234dfc17e1f7dbd7ede09cbc4009a32ce8c06deee11ed6dfa165c",
+        "sha256_in_prefix": "45bebdbd2f9234dfc17e1f7dbd7ede09cbc4009a32ce8c06deee11ed6dfa165c",
+        "size_in_bytes": 8
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc.cpython-311-x86_64-linux-gnu.so",
+        "path_type": "hardlink",
+        "sha256": "094b2679fd39ce09bbe1d6e84e8ec98a0a29139c6329706fa9abb6767b6a3e56",
+        "sha256_in_prefix": "094b2679fd39ce09bbe1d6e84e8ec98a0a29139c6329706fa9abb6767b6a3e56",
+        "size_in_bytes": 195680
+      },
+      {
+        "_path": "lib/python3.11/site-packages/pyodbc.pyi",
+        "path_type": "hardlink",
+        "sha256": "6121dc4bc0c7ce082003978a549b81a6fcfa44039268edfd06a4d4125ec60367",
+        "sha256_in_prefix": "6121dc4bc0c7ce082003978a549b81a6fcfa44039268edfd06a4d4125ec60367",
+        "size_in_bytes": 32673
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "pyodbc",
+  "sha256": "38220e97800db06b8648a250f9787a697938adab9a13f08649cc68226a96459f",
+  "size": 81463,
+  "subdir": "linux-64",
+  "timestamp": 1737479722000,
+  "url": "https://conda.anaconda.org/anaconda/linux-64/pyodbc-5.2.0-py311h6a678d5_0.tar.bz2",
+  "version": "5.2.0"
+}

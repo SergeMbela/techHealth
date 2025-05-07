@@ -1,0 +1,8 @@
+name: teachHealth
+channels:
+  - defaults
+dependencies:
+  - python=3.11.7
+  - pyodbc
+  - sqlalchemy
+prefix: /home/sergembela/anaconda3/envs/teachHealth

@@ -1,0 +1,143 @@
+{
+  "build": "h767d61c_2",
+  "build_number": 2,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [
+    "libgomp 14.2.0 h767d61c_2",
+    "libgcc-ng ==14.2.0 *_2"
+  ],
+  "depends": [
+    "__glibc >=2.17,<3.0.a0",
+    "_openmp_mutex >=4.5"
+  ],
+  "extracted_package_dir": "/home/sergembela/anaconda3/pkgs/libgcc-14.2.0-h767d61c_2",
+  "files": [
+    "lib/libatomic.so",
+    "lib/libatomic.so.1",
+    "lib/libatomic.so.1.2.0",
+    "lib/libgcc_s.so",
+    "lib/libgcc_s.so.1",
+    "lib/libitm.so",
+    "lib/libitm.so.1",
+    "lib/libitm.so.1.0.0",
+    "lib/libquadmath.so",
+    "lib/libquadmath.so.0",
+    "lib/libquadmath.so.0.0.0",
+    "share/info/libgomp.info",
+    "share/info/libquadmath.info",
+    "share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION"
+  ],
+  "fn": "libgcc-14.2.0-h767d61c_2.conda",
+  "license": "GPL-3.0-only WITH GCC-exception-3.1",
+  "link": {
+    "source": "/home/sergembela/anaconda3/pkgs/libgcc-14.2.0-h767d61c_2",
+    "type": 1
+  },
+  "md5": "ef504d1acbd74b7cc6849ef8af47dd03",
+  "name": "libgcc",
+  "package_tarball_full_path": "/home/sergembela/anaconda3/pkgs/libgcc-14.2.0-h767d61c_2.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/libatomic.so",
+        "path_type": "softlink",
+        "sha256": "411cad0e4bff9de1905e568bc14ab967f436e0cdc0c39d1972bc4102091c28f5",
+        "size_in_bytes": 167128
+      },
+      {
+        "_path": "lib/libatomic.so.1",
+        "path_type": "softlink",
+        "sha256": "411cad0e4bff9de1905e568bc14ab967f436e0cdc0c39d1972bc4102091c28f5",
+        "size_in_bytes": 167128
+      },
+      {
+        "_path": "lib/libatomic.so.1.2.0",
+        "path_type": "hardlink",
+        "sha256": "411cad0e4bff9de1905e568bc14ab967f436e0cdc0c39d1972bc4102091c28f5",
+        "sha256_in_prefix": "411cad0e4bff9de1905e568bc14ab967f436e0cdc0c39d1972bc4102091c28f5",
+        "size_in_bytes": 167128
+      },
+      {
+        "_path": "lib/libgcc_s.so",
+        "path_type": "hardlink",
+        "sha256": "69a56a9993b7729b29b274e65016031c81f2397f176ed5ad44d59bd50425e0bd",
+        "sha256_in_prefix": "69a56a9993b7729b29b274e65016031c81f2397f176ed5ad44d59bd50425e0bd",
+        "size_in_bytes": 132
+      },
+      {
+        "_path": "lib/libgcc_s.so.1",
+        "path_type": "hardlink",
+        "sha256": "2b91b95095e7acbc7f9541e71ff1e7b2776214f9b03f5ceecd4a49f3050a6aed",
+        "sha256_in_prefix": "2b91b95095e7acbc7f9541e71ff1e7b2776214f9b03f5ceecd4a49f3050a6aed",
+        "size_in_bytes": 649080
+      },
+      {
+        "_path": "lib/libitm.so",
+        "path_type": "softlink",
+        "sha256": "01d5917189dec109cf3441698e675fe38603e956eabf97e1b5d4a26fcb46ca7a",
+        "size_in_bytes": 778656
+      },
+      {
+        "_path": "lib/libitm.so.1",
+        "path_type": "softlink",
+        "sha256": "01d5917189dec109cf3441698e675fe38603e956eabf97e1b5d4a26fcb46ca7a",
+        "size_in_bytes": 778656
+      },
+      {
+        "_path": "lib/libitm.so.1.0.0",
+        "path_type": "hardlink",
+        "sha256": "01d5917189dec109cf3441698e675fe38603e956eabf97e1b5d4a26fcb46ca7a",
+        "sha256_in_prefix": "01d5917189dec109cf3441698e675fe38603e956eabf97e1b5d4a26fcb46ca7a",
+        "size_in_bytes": 778656
+      },
+      {
+        "_path": "lib/libquadmath.so",
+        "path_type": "softlink",
+        "sha256": "89a27f322eb9b63d0eae0a73a7181a20420e5ee7995bd04de32ade0132f7447f",
+        "size_in_bytes": 765664
+      },
+      {
+        "_path": "lib/libquadmath.so.0",
+        "path_type": "softlink",
+        "sha256": "89a27f322eb9b63d0eae0a73a7181a20420e5ee7995bd04de32ade0132f7447f",
+        "size_in_bytes": 765664
+      },
+      {
+        "_path": "lib/libquadmath.so.0.0.0",
+        "path_type": "hardlink",
+        "sha256": "89a27f322eb9b63d0eae0a73a7181a20420e5ee7995bd04de32ade0132f7447f",
+        "sha256_in_prefix": "89a27f322eb9b63d0eae0a73a7181a20420e5ee7995bd04de32ade0132f7447f",
+        "size_in_bytes": 765664
+      },
+      {
+        "_path": "share/info/libgomp.info",
+        "path_type": "hardlink",
+        "sha256": "8fa6c469e99f83f3aca2177dd0c2b3c25801cf22ca3e25f858800c756cb7ba50",
+        "sha256_in_prefix": "8fa6c469e99f83f3aca2177dd0c2b3c25801cf22ca3e25f858800c756cb7ba50",
+        "size_in_bytes": 326907
+      },
+      {
+        "_path": "share/info/libquadmath.info",
+        "path_type": "hardlink",
+        "sha256": "5e1c488da2087dab83f574153673f3875c73adc8e11c917142c9d5f7de8462d6",
+        "sha256_in_prefix": "5e1c488da2087dab83f574153673f3875c73adc8e11c917142c9d5f7de8462d6",
+        "size_in_bytes": 36620
+      },
+      {
+        "_path": "share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION",
+        "path_type": "hardlink",
+        "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+        "sha256_in_prefix": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+        "size_in_bytes": 3324
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "3a572d031cb86deb541d15c1875aaa097baefc0c580b54dc61f5edab99215792",
+  "size": 847885,
+  "subdir": "linux-64",
+  "timestamp": 1740240653000,
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/libgcc-14.2.0-h767d61c_2.conda",
+  "version": "14.2.0"
+}

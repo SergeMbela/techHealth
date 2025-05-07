@@ -1,0 +1,131 @@
+{
+  "build": "py311h6a678d5_9",
+  "build_number": 9,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "python >=3.11,<3.12.0a0"
+  ],
+  "extracted_package_dir": "/home/sergembela/anaconda3/pkgs/brotli-python-1.0.9-py311h6a678d5_9",
+  "files": [
+    "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/INSTALLER",
+    "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/LICENSE",
+    "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/METADATA",
+    "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/RECORD",
+    "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/REQUESTED",
+    "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/WHEEL",
+    "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/direct_url.json",
+    "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/top_level.txt",
+    "lib/python3.11/site-packages/__pycache__/brotli.cpython-311.pyc",
+    "lib/python3.11/site-packages/__pycache__/brotli.cpython-313.pyc",
+    "lib/python3.11/site-packages/_brotli.cpython-311-x86_64-linux-gnu.so",
+    "lib/python3.11/site-packages/brotli.py"
+  ],
+  "fn": "brotli-python-1.0.9-py311h6a678d5_9.conda",
+  "license": "MIT",
+  "link": {
+    "source": "/home/sergembela/anaconda3/pkgs/brotli-python-1.0.9-py311h6a678d5_9",
+    "type": 1
+  },
+  "md5": "7e502802233b57c187078b188defb436",
+  "name": "brotli-python",
+  "package_tarball_full_path": "/home/sergembela/anaconda3/pkgs/brotli-python-1.0.9-py311h6a678d5_9.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/INSTALLER",
+        "path_type": "hardlink",
+        "sha256": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "sha256_in_prefix": "d0edee15f91b406f3f99726e44eb990be6e34fd0345b52b910c568e0eef6a2a8",
+        "size_in_bytes": 5
+      },
+      {
+        "_path": "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/LICENSE",
+        "path_type": "hardlink",
+        "sha256": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
+        "sha256_in_prefix": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94",
+        "size_in_bytes": 1084
+      },
+      {
+        "_path": "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/METADATA",
+        "path_type": "hardlink",
+        "sha256": "7d1dce650d5f97857af281a7613b481b137da87bc7c53fa13862ba0768b9ae3c",
+        "sha256_in_prefix": "7d1dce650d5f97857af281a7613b481b137da87bc7c53fa13862ba0768b9ae3c",
+        "size_in_bytes": 1357
+      },
+      {
+        "_path": "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/RECORD",
+        "path_type": "hardlink",
+        "sha256": "97c2222cd82cf5d435824902d3d03ed6d587733b11238cadfd7d64285b4eaaed",
+        "sha256_in_prefix": "97c2222cd82cf5d435824902d3d03ed6d587733b11238cadfd7d64285b4eaaed",
+        "size_in_bytes": 859
+      },
+      {
+        "_path": "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/REQUESTED",
+        "path_type": "hardlink",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "sha256_in_prefix": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_in_bytes": 0
+      },
+      {
+        "_path": "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/WHEEL",
+        "path_type": "hardlink",
+        "sha256": "6b5274ddb54ad0f24b0f8615329a881cc441a42704e389649cdc803bf22d4c51",
+        "sha256_in_prefix": "6b5274ddb54ad0f24b0f8615329a881cc441a42704e389649cdc803bf22d4c51",
+        "size_in_bytes": 104
+      },
+      {
+        "_path": "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/direct_url.json",
+        "path_type": "hardlink",
+        "sha256": "767636ec057575987e59afda973acf058b5bf6f5dbcb5f1312a7070edb7a1f98",
+        "sha256_in_prefix": "767636ec057575987e59afda973acf058b5bf6f5dbcb5f1312a7070edb7a1f98",
+        "size_in_bytes": 72
+      },
+      {
+        "_path": "lib/python3.11/site-packages/Brotli-1.0.9.dist-info/top_level.txt",
+        "path_type": "hardlink",
+        "sha256": "82c4b9e07ae13b766f785c5e32b2a8ffba87e129b84db43b8c62d5044a89e0d2",
+        "sha256_in_prefix": "82c4b9e07ae13b766f785c5e32b2a8ffba87e129b84db43b8c62d5044a89e0d2",
+        "size_in_bytes": 15
+      },
+      {
+        "_path": "lib/python3.11/site-packages/__pycache__/brotli.cpython-311.pyc",
+        "path_type": "hardlink",
+        "sha256": "8334961bdecf3db3e834824df2eee5053b133e83c757dbbf77d2b7acc07839c9",
+        "sha256_in_prefix": "8334961bdecf3db3e834824df2eee5053b133e83c757dbbf77d2b7acc07839c9",
+        "size_in_bytes": 2098
+      },
+      {
+        "_path": "lib/python3.11/site-packages/__pycache__/brotli.cpython-313.pyc",
+        "path_type": "hardlink",
+        "sha256": "c4097c558d0cd61ac86c334e0f4bed2b06215df0c4c87a1dab1467ff54002cb8",
+        "sha256_in_prefix": "c4097c558d0cd61ac86c334e0f4bed2b06215df0c4c87a1dab1467ff54002cb8",
+        "size_in_bytes": 1796
+      },
+      {
+        "_path": "lib/python3.11/site-packages/_brotli.cpython-311-x86_64-linux-gnu.so",
+        "path_type": "hardlink",
+        "sha256": "8af9f581c85e80efe3271d63fa5b7795eca3525984286eaf739bdd52159f7b32",
+        "sha256_in_prefix": "8af9f581c85e80efe3271d63fa5b7795eca3525984286eaf739bdd52159f7b32",
+        "size_in_bytes": 788808
+      },
+      {
+        "_path": "lib/python3.11/site-packages/brotli.py",
+        "path_type": "hardlink",
+        "sha256": "8b0a109cfbeb00db5a2584c9ea64a3390504347ed9f1180011b9fe1f1311fa45",
+        "sha256_in_prefix": "8b0a109cfbeb00db5a2584c9ea64a3390504347ed9f1180011b9fe1f1311fa45",
+        "size_in_bytes": 1857
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "d587816b069eed0b61129ca2c928223a6aa439cce388163c633df9862e091476",
+  "size": 364490,
+  "subdir": "linux-64",
+  "timestamp": 1736182674000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/brotli-python-1.0.9-py311h6a678d5_9.conda",
+  "version": "1.0.9"
+}

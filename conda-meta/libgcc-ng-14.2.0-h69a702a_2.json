@@ -1,0 +1,31 @@
+{
+  "build": "h69a702a_2",
+  "build_number": 2,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc 14.2.0 h767d61c_2"
+  ],
+  "extracted_package_dir": "/home/sergembela/anaconda3/pkgs/libgcc-ng-14.2.0-h69a702a_2",
+  "files": [],
+  "fn": "libgcc-ng-14.2.0-h69a702a_2.conda",
+  "license": "GPL-3.0-only WITH GCC-exception-3.1",
+  "link": {
+    "source": "/home/sergembela/anaconda3/pkgs/libgcc-ng-14.2.0-h69a702a_2",
+    "type": 1
+  },
+  "md5": "a2222a6ada71fb478682efe483ce0f92",
+  "name": "libgcc-ng",
+  "package_tarball_full_path": "/home/sergembela/anaconda3/pkgs/libgcc-ng-14.2.0-h69a702a_2.conda",
+  "paths_data": {
+    "paths": [],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "fb7558c328b38b2f9d2e412c48da7890e7721ba018d733ebdfea57280df01904",
+  "size": 53758,
+  "subdir": "linux-64",
+  "timestamp": 1740240660000,
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/libgcc-ng-14.2.0-h69a702a_2.conda",
+  "version": "14.2.0"
+}

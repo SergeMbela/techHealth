@@ -1,0 +1,56 @@
+{
+  "build": "h767d61c_2",
+  "build_number": 2,
+  "channel": "https://conda.anaconda.org/conda-forge/linux-64",
+  "constrains": [],
+  "depends": [
+    "__glibc >=2.17,<3.0.a0"
+  ],
+  "extracted_package_dir": "/home/sergembela/anaconda3/pkgs/libgomp-14.2.0-h767d61c_2",
+  "files": [
+    "lib/libgomp.so",
+    "lib/libgomp.so.1.0.0",
+    "share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION.gomp_copy"
+  ],
+  "fn": "libgomp-14.2.0-h767d61c_2.conda",
+  "license": "GPL-3.0-only WITH GCC-exception-3.1",
+  "link": {
+    "source": "/home/sergembela/anaconda3/pkgs/libgomp-14.2.0-h767d61c_2",
+    "type": 1
+  },
+  "md5": "06d02030237f4d5b3d9a7e7d348fe3c6",
+  "name": "libgomp",
+  "package_tarball_full_path": "/home/sergembela/anaconda3/pkgs/libgomp-14.2.0-h767d61c_2.conda",
+  "paths_data": {
+    "paths": [
+      {
+        "_path": "lib/libgomp.so",
+        "path_type": "softlink",
+        "sha256": "b6bd0f692ea322117f202437b2fb2a6963f0ade5f48997111a90728104de58cd",
+        "size_in_bytes": 1119888
+      },
+      {
+        "_path": "lib/libgomp.so.1.0.0",
+        "path_type": "hardlink",
+        "sha256": "b6bd0f692ea322117f202437b2fb2a6963f0ade5f48997111a90728104de58cd",
+        "sha256_in_prefix": "b6bd0f692ea322117f202437b2fb2a6963f0ade5f48997111a90728104de58cd",
+        "size_in_bytes": 1119888
+      },
+      {
+        "_path": "share/licenses/gcc-libs/RUNTIME.LIBRARY.EXCEPTION.gomp_copy",
+        "path_type": "hardlink",
+        "sha256": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+        "sha256_in_prefix": "9d6b43ce4d8de0c878bf16b54d8e7a10d9bd42b75178153e3af6a815bdc90f74",
+        "size_in_bytes": 3324
+      }
+    ],
+    "paths_version": 1
+  },
+  "requested_spec": "None",
+  "sha256": "1a3130e0b9267e781b89399580f3163632d59fe5b0142900d63052ab1a53490e",
+  "size": 459862,
+  "subdir": "linux-64",
+  "timestamp": 1740240588000,
+  "url": "https://conda.anaconda.org/conda-forge/linux-64/libgomp-14.2.0-h767d61c_2.conda",
+  "version": "14.2.0"
+}
