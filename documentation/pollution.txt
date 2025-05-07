@@ -1,0 +1,14 @@
+1. Indice de la qualité de l'air (IQA)
+L'IQA est un indice composite utilisé pour mesurer la qualité de l'air en fonction des niveaux de différents polluants. Il varie de 0 à 100 (ou plus), où un indice plus élevé indique une pollution plus importante. Les principaux polluants mesurés par cet indice sont :
+
+PM10 (particules fines de diamètre inférieur à 10 microns)
+
+PM2,5 (particules fines de diamètre inférieur à 2,5 microns)
+
+Ozone (O₃)
+
+Dioxyde d'azote (NO₂)
+
+Dioxyde de soufre (SO₂)
+
+Monoxyde de carbone (CO)
