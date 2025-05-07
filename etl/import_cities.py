@@ -43,12 +43,17 @@ with open(fichier_csv, newline='', encoding='utf-8')  as csvfile, \
     for row in reader:
         try:
             cursor.execute("""
-                INSERT INTO dbo.Villes (
-                    Ville, Latitude, Longitude
-                )
-                VALUES (?, ?, ?)
+INSERT INTO [dbo].[Villes]
+       ([Ville], [Latitude], [Longitude], [Population],
+        [PM25], [NO2], [O3], [Grippe_Cas_100k], [Hospitalisations_Grippe_Pourcentage])
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, 
-            row['Ville'], row['Latitude'], row['Longitude'])
+            row['Ville'], row['Latitude'], row['Longitude'], int(row['Population']),
+        float(row['PM2.5 (µg/m³)']),
+        float(row['NO2 (ppb)']),
+        float(row['O3 (ppb)']),
+        int(row['Grippe (cas/100k hab.)']),
+        float(row['Hospitalisations grippe (taux %)']))
 
         except Exception as e:
             print(f"❌ Erreur sur la ligne {row}: {e}")
@@ -58,3 +63,4 @@ conn.commit()
 cursor.close()
 conn.close()
 print("✅ ETL terminé.")
+
