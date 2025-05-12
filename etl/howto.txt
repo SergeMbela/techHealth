@@ -1,3 +1,3 @@
 1. Insérer les patients (import_patients_ipynb)
 2. Insérer les données de prises de sang des patients (insert_treatment.ipynb)
-3. Contrainte pour
+3. Contrainte pour les prise de sang maximum 52par an et par patients soit tous les 52mercredi de l'année.
