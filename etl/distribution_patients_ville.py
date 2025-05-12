@@ -19,7 +19,7 @@ engine = conn.get_sqlalchemy_engine()
 
 # Étape 1 : Récupérer les villes et leurs populations
 with engine.connect() as connection:
-    villes_df = pd.read_sql("SELECT Id_Ville, Population FROM Villes", connection)
+    villes_df = pd.read_sql("SELECT Ville, Population FROM Villes", connection)
 
 # Analyse des données des villes
 print("\nStatistiques des populations par ville:")
@@ -27,7 +27,7 @@ print(villes_df['Population'].describe())
 
 # Étape 2 : Tirage pondéré de 100 000 villes
 villes_choisies = random.choices(
-    villes_df["Id_Ville"].tolist(),
+    villes_df["Ville"].tolist(),
     weights=villes_df["Population"].tolist(),
     k=100_000
 )
@@ -35,21 +35,21 @@ villes_choisies = random.choices(
 # Créer un DataFrame pour les villes choisies
 villes_choisies_df = pd.DataFrame({
     'id_patient': range(1, len(villes_choisies) + 1),
-    'ville_id': villes_choisies
+    'Ville': villes_choisies
 })
 
 # Analyse de la distribution
-distribution = villes_choisies_df['ville_id'].value_counts()
+distribution = villes_choisies_df['Ville'].value_counts()
 print("\nDistribution des patients par ville:")
 print(f"Nombre total de villes utilisées: {len(distribution)}")
 print(f"Villes avec le plus de patients:")
 print(distribution.head())
 
-# Étape 3 : Préparer les tuples (id_patient, ville_id)
-associations = list(zip(villes_choisies_df['id_patient'], villes_choisies_df['ville_id']))
+# Étape 3 : Préparer les tuples (id_patient, Ville)
+associations = list(zip(villes_choisies_df['id_patient'], villes_choisies_df['Ville']))
 
 # Étape 4 : Insertion en batch avec barre de progression
-insert_query = text("INSERT INTO patients_cities (id_patient, ville_id) VALUES (:id_patient, :ville_id)")
+insert_query = text("INSERT INTO patients_cities (id_patient, Ville) VALUES (:id_patient, :Ville)")
 batch_size = 10_000
 start_time = time.time()
 
@@ -57,8 +57,8 @@ with engine.begin() as connection:  # engine.begin() gère commit automatiquemen
     for i in tqdm(range(0, len(associations), batch_size), desc="Insertion des données"):
         batch = associations[i:i+batch_size]
         connection.execute(insert_query, [
-            {"id_patient": id_patient, "ville_id": ville_id}
-            for id_patient, ville_id in batch
+            {"id_patient": id_patient, "Ville": ville}
+            for id_patient, ville in batch
         ])
 
 elapsed = time.time() - start_time
@@ -68,7 +68,7 @@ print(f"\nInsertion terminée en {elapsed:.2f} secondes.")
 with engine.connect() as connection:
     verification_df = pd.read_sql("""
         SELECT COUNT(*) as total_patients, 
-               COUNT(DISTINCT ville_id) as total_villes
+               COUNT(DISTINCT Ville) as total_villes
         FROM patients_cities
     """, connection)
     print("\nVérification finale:")
