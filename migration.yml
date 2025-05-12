@@ -1,0 +1,152 @@
+# Configuration de migration pour teachHealth
+version: "1.0"
+project:
+  name: "teachHealth"
+  description: "Projet d'analyse de l'efficacité d'un nouveau traitement contre la grippe saisonnière"
+  version: "1.0.0"
+
+# Configuration de l'environnement
+environment:
+  python_version: "3.11.7"
+  conda_env: "teachHealth"
+  required_tools:
+    - name: "Docker Desktop"
+      version: "latest"
+      purpose: "Exécution de SQL Server"
+    - name: "SQL Server Management Studio"
+      version: "2019"
+      purpose: "Gestion de la base de données"
+    - name: "Power BI"
+      version: "latest"
+      purpose: "Visualisation des données"
+    - name: "WSL"
+      version: "2"
+      purpose: "Environnement Linux sur Windows"
+
+# Dépendances Python
+dependencies:
+  python_packages:
+    - name: "pandas"
+      version: "2.1.0"
+    - name: "numpy"
+      version: "1.24.3"
+    - name: "sqlalchemy"
+      version: "2.0.0"
+    - name: "pyodbc"
+      version: "4.0.39"
+    - name: "python-dotenv"
+      version: "1.0.0"
+    - name: "pyyaml"
+      version: "6.0.1"
+    - name: "jupyter"
+      version: "1.0.0"
+    - name: "matplotlib"
+      version: "3.7.2"
+    - name: "seaborn"
+      version: "0.12.2"
+
+# Configuration de la base de données
+database:
+  type: "SQL Server"
+  version: "2019"
+  docker:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    port: 1433
+    environment:
+      - "ACCEPT_EULA=Y"
+      - "MSSQL_SA_PASSWORD=${DB_PASSWORD}"
+  required_tables:
+    - name: "Villes"
+      dependencies: []
+    - name: "Patients"
+      dependencies: ["Villes"]
+    - name: "TemperatureDaily"
+      dependencies: ["Villes"]
+    - name: "PrisesSang"
+      dependencies: ["Patients"]
+    - name: "VaccinationsGrippe"
+      dependencies: ["Patients"]
+    - name: "Analyse"
+      dependencies: ["Patients", "PrisesSang"]
+
+# Étapes de migration
+migration_steps:
+  - name: "Préparation de l'environnement"
+    steps:
+      - "Installer Docker Desktop"
+      - "Installer WSL et Ubuntu"
+      - "Installer Anaconda"
+      - "Créer l'environnement conda"
+    order: 1
+
+  - name: "Configuration de la base de données"
+    steps:
+      - "Démarrer le conteneur SQL Server"
+      - "Créer la base de données"
+      - "Exécuter les scripts de création des tables"
+    order: 2
+    scripts:
+      - "create_villes.sql"
+      - "contrainte_unicite_ville.sql"
+      - "create_patients.sql"
+      - "create_temperature_daily.sql"
+      - "create_prises_sang.sql"
+      - "create_vaccinations_grippe.sql"
+      - "analyse.sql"
+
+  - name: "Importation des données"
+    steps:
+      - "Importer les villes"
+      - "Importer les patients"
+      - "Importer les températures"
+      - "Générer les analyses"
+      - "Générer les résultats d'analyses"
+    order: 3
+    scripts:
+      - "import_cities.py"
+      - "import_patients.py"
+      - "insert_temperatures.py"
+      - "insert_analyse.py"
+      - "insert_resultat_analyse.py"
+
+  - name: "Vérification et validation"
+    steps:
+      - "Vérifier l'intégrité des données"
+      - "Valider les contraintes"
+      - "Générer les rapports de validation"
+    order: 4
+
+# Configuration des logs
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(levelname)s - %(message)s"
+  files:
+    - name: "migration.log"
+      path: "logs/migration.log"
+    - name: "etl_errors.log"
+      path: "etl/etl_errors.log"
+    - name: "sql_execution.log"
+      path: "etl/sql_execution.log"
+
+# Paramètres d'exécution
+execution:
+  batch_size: 1000
+  max_retries: 3
+  retry_delay: 5
+  timeout: 300
+  parallel_execution: true
+  max_workers: 4
+
+# Sauvegarde et restauration
+backup:
+  enabled: true
+  frequency: "daily"
+  retention: 7
+  location: "backups/"
+  tables:
+    - "Villes"
+    - "Patients"
+    - "TemperatureDaily"
+    - "PrisesSang"
+    - "VaccinationsGrippe"
+    - "Analyse" 

@@ -1,0 +1,53 @@
+# Configuration pour l'exécution des scripts SQL
+database:
+  required_env_vars:
+    - DB_USERNAME
+    - DB_PASSWORD
+    - DB_SERVER
+    - DB_NAME
+  connection_params:
+    driver: "ODBC Driver 18 for SQL Server"
+    encrypt: false
+    trust_server_certificate: true
+    multiple_active_result_sets: true
+
+# Ordre d'exécution des scripts SQL
+scripts:
+  execution_order:
+    - name: "create_villes.sql"
+      description: "Création de la table des villes"
+      dependencies: []
+    - name: "contrainte_unicite_ville.sql"
+      description: "Ajout des contraintes d'unicité pour les villes"
+      dependencies: ["create_villes.sql"]
+    - name: "create_patients.sql"
+      description: "Création de la table des patients"
+      dependencies: ["create_villes.sql"]
+    - name: "create_temperature_daily.sql"
+      description: "Création de la table des températures quotidiennes"
+      dependencies: ["create_villes.sql"]
+    - name: "create_prises_sang.sql"
+      description: "Création de la table des prises de sang"
+      dependencies: ["create_patients.sql"]
+    - name: "create_vaccinations_grippe.sql"
+      description: "Création de la table des vaccinations"
+      dependencies: ["create_patients.sql"]
+    - name: "analyse.sql"
+      description: "Création de la table des analyses"
+      dependencies: ["create_patients.sql", "create_prises_sang.sql"]
+
+# Configuration du logging
+logging:
+  level: INFO
+  format: "%(asctime)s - %(levelname)s - %(message)s"
+  file: "sql_execution.log"
+  handlers:
+    - file
+    - console
+
+# Paramètres d'exécution
+execution:
+  batch_size: 1000
+  max_retries: 3
+  retry_delay: 5  # secondes
+  timeout: 300    # secondes 
