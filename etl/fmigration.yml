@@ -1,0 +1,121 @@
+version: 1.0
+
+# Configuration de la base de données
+database:
+  type: mssql
+  host: ${DB_SERVER}
+  database: ${DB_NAME}
+  username: ${DB_USERNAME}
+  password: ${DB_PASSWORD}
+  port: 1433
+  driver: ODBC Driver 18 for SQL Server
+  options:
+    Encrypt: no
+    TrustServerCertificate: yes
+    MultipleActiveResultSets: true
+    ConnectionTimeout: 30
+    CommandTimeout: 300
+    PoolSize: 5
+    MaxOverflow: 10
+
+# Configuration des migrations
+migrations:
+  directory: ./migrations
+  table: schema_migrations
+  lock_timeout: 60
+  version_format: timestamp
+  version_separator: _
+  version_prefix: V
+
+# Configuration des seeds
+seeds:
+  directory: ./seeds
+  table: seed_migrations
+  lock_timeout: 30
+
+# Configuration des environnements
+environments:
+  development:
+    database:
+      type: mssql
+      host: ${DB_SERVER}
+      database: ${DB_NAME}
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      port: 1433
+      driver: ODBC Driver 18 for SQL Server
+      options:
+        Encrypt: no
+        TrustServerCertificate: yes
+        MultipleActiveResultSets: true
+        ConnectionTimeout: 30
+        CommandTimeout: 300
+        PoolSize: 5
+        MaxOverflow: 10
+    logging:
+      level: DEBUG
+      file: ./logs/development.log
+
+  production:
+    database:
+      type: mssql
+      host: ${DB_SERVER}
+      database: ${DB_NAME}
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      port: 1433
+      driver: ODBC Driver 18 for SQL Server
+      options:
+        Encrypt: yes
+        TrustServerCertificate: no
+        MultipleActiveResultSets: true
+        ConnectionTimeout: 30
+        CommandTimeout: 300
+        PoolSize: 10
+        MaxOverflow: 20
+    logging:
+      level: INFO
+      file: ./logs/production.log
+
+# Configuration des scripts
+scripts:
+  pre_migrate:
+    - python -m pip install -r requirements.txt
+    - python -m pip install -e .
+    - python -m etl.setup_logging
+  post_migrate:
+    - python -m etl.import_cities
+    - python -m etl.distribution_patients_ville
+    - python -m etl.insert_resultat_analyse
+  rollback:
+    - python -m etl.cleanup_data
+
+# Configuration du logging
+logging:
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  date_format: '%Y-%m-%d %H:%M:%S'
+  handlers:
+    console:
+      level: INFO
+      formatter: standard
+    file:
+      level: DEBUG
+      formatter: detailed
+      filename: ./logs/migration.log
+      max_bytes: 10485760  # 10MB
+      backup_count: 5
+
+# Configuration des notifications
+notifications:
+  email:
+    enabled: false
+    smtp_server: ${SMTP_SERVER}
+    smtp_port: ${SMTP_PORT}
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
+    from_address: ${NOTIFICATION_EMAIL}
+    to_addresses: ${ADMIN_EMAILS}
+  slack:
+    enabled: false
+    webhook_url: ${SLACK_WEBHOOK_URL}
+    channel: ${SLACK_CHANNEL} 

@@ -1,0 +1,146 @@
+version: 1.0
+
+# Configuration des migrations
+migrations:
+  - name: create_base_tables
+    version: V1_0_0
+    description: "Création des tables de base"
+    up:
+      - file: ./migrations/V1_0_0_create_base_tables.sql
+        type: sql
+    down:
+      - file: ./migrations/V1_0_0_create_base_tables_rollback.sql
+        type: sql
+
+  - name: create_patients_tables
+    version: V1_1_0
+    description: "Création des tables liées aux patients"
+    dependencies:
+      - create_base_tables
+    up:
+      - file: ./migrations/V1_1_0_create_patients_tables.sql
+        type: sql
+    down:
+      - file: ./migrations/V1_1_0_create_patients_tables_rollback.sql
+        type: sql
+
+  - name: create_analyses_tables
+    version: V1_2_0
+    description: "Création des tables d'analyses"
+    dependencies:
+      - create_patients_tables
+    up:
+      - file: ./migrations/V1_2_0_create_analyses_tables.sql
+        type: sql
+    down:
+      - file: ./migrations/V1_2_0_create_analyses_tables_rollback.sql
+        type: sql
+
+  - name: create_villes_tables
+    version: V1_3_0
+    description: "Création des tables de villes et pollution"
+    dependencies:
+      - create_base_tables
+    up:
+      - file: ./migrations/V1_3_0_create_villes_tables.sql
+        type: sql
+    down:
+      - file: ./migrations/V1_3_0_create_villes_tables_rollback.sql
+        type: sql
+
+  - name: create_indexes
+    version: V1_4_0
+    description: "Création des index pour optimiser les performances"
+    dependencies:
+      - create_patients_tables
+      - create_analyses_tables
+      - create_villes_tables
+    up:
+      - file: ./migrations/V1_4_0_create_indexes.sql
+        type: sql
+    down:
+      - file: ./migrations/V1_4_0_create_indexes_rollback.sql
+        type: sql
+
+# Configuration des seeds
+seeds:
+  - name: seed_parametres_biologiques
+    version: S1_0_0
+    description: "Insertion des paramètres biologiques de base"
+    dependencies:
+      - create_base_tables
+    up:
+      - file: ./seeds/S1_0_0_seed_parametres_biologiques.sql
+        type: sql
+    down:
+      - file: ./seeds/S1_0_0_seed_parametres_biologiques_rollback.sql
+        type: sql
+
+  - name: seed_villes
+    version: S1_1_0
+    description: "Insertion des données de villes et pollution"
+    dependencies:
+      - create_villes_tables
+    up:
+      - file: ./seeds/S1_1_0_seed_villes.sql
+        type: sql
+    down:
+      - file: ./seeds/S1_1_0_seed_villes_rollback.sql
+        type: sql
+
+# Configuration des triggers
+triggers:
+  - name: update_patient_stats
+    version: T1_0_0
+    description: "Trigger pour mettre à jour les statistiques patient"
+    dependencies:
+      - create_patients_tables
+    up:
+      - file: ./triggers/T1_0_0_update_patient_stats.sql
+        type: sql
+    down:
+      - file: ./triggers/T1_0_0_update_patient_stats_rollback.sql
+        type: sql
+
+# Configuration des procédures stockées
+procedures:
+  - name: calculate_pollution_impact
+    version: P1_0_0
+    description: "Procédure pour calculer l'impact de la pollution"
+    dependencies:
+      - create_villes_tables
+    up:
+      - file: ./procedures/P1_0_0_calculate_pollution_impact.sql
+        type: sql
+    down:
+      - file: ./procedures/P1_0_0_calculate_pollution_impact_rollback.sql
+        type: sql
+
+# Configuration des vues
+views:
+  - name: patient_analyses_view
+    version: VW1_0_0
+    description: "Vue pour les analyses patient"
+    dependencies:
+      - create_patients_tables
+      - create_analyses_tables
+    up:
+      - file: ./views/VW1_0_0_patient_analyses_view.sql
+        type: sql
+    down:
+      - file: ./views/VW1_0_0_patient_analyses_view_rollback.sql
+        type: sql
+
+# Configuration des permissions
+permissions:
+  - name: setup_user_permissions
+    version: PERM1_0_0
+    description: "Configuration des permissions utilisateur"
+    dependencies:
+      - create_base_tables
+    up:
+      - file: ./permissions/PERM1_0_0_setup_user_permissions.sql
+        type: sql
+    down:
+      - file: ./permissions/PERM1_0_0_setup_user_permissions_rollback.sql
+        type: sql 
