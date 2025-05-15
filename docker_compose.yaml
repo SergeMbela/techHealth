@@ -1,0 +1,15 @@
+version: '3'
+services:
+  charts:
+    image: mongodb/charts:latest
+    ports:
+      - "8080:80"
+    environment:
+      - CHARTS_MONGODB_URI=mongodb://host.docker.internal:27017
+      - CHARTS_ADMIN_USER=admin
+      - CHARTS_ADMIN_PASS=admin123
+    volumes:
+      - chartsdata:/mongodb-charts
+
+volumes:
+  chartsdata:

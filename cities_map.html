@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_9d023f8b922481ea05a93c9ea088aa8c {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+</head>
+<body>
+    
+    
+        <h3 align="center" style="font-size:16px">
+            <b>Patient Distribution Map</b><br>
+            Total Patients: 280,929 | Cities: 30
+        </h3>
+    
+    
+            <div class="folium-map" id="map_9d023f8b922481ea05a93c9ea088aa8c" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_9d023f8b922481ea05a93c9ea088aa8c = L.map(
+                "map_9d023f8b922481ea05a93c9ea088aa8c",
+                {
+                    center: [36.89498666666667, -96.1819],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b67b4e4d9f4f08cd8361a21f06cd10bf = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b67b4e4d9f4f08cd8361a21f06cd10bf.addTo(map_9d023f8b922481ea05a93c9ea088aa8c);
+        
+    
+            var tile_layer_aa2d81d3ea328e6f87e372141061b821 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_aa2d81d3ea328e6f87e372141061b821.addTo(map_9d023f8b922481ea05a93c9ea088aa8c);
+        
+    
+            var tile_layer_b5563d80b721213665809b1ed99856f9 = L.tileLayer(
+                "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Map tiles by \u003ca href=\"http://stamen.com\"\u003eStamen Design\u003c/a\u003e, \u003ca href=\"http://creativecommons.org/licenses/by/3.0\"\u003eCC BY 3.0\u003c/a\u003e \u0026mdash; Map data \u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b5563d80b721213665809b1ed99856f9.addTo(map_9d023f8b922481ea05a93c9ea088aa8c);
+        
+    
+    var color_map_259db7e744dcfedf663b6f5ba8d8e2bc = {};
+
+    
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.color = d3.scale.threshold()
+              .domain([271.0, 332.8617234468938, 394.7234468937876, 456.5851703406814, 518.4468937875752, 580.308617234469, 642.1703406813627, 704.0320641282565, 765.8937875751503, 827.7555110220441, 889.6172344689379, 951.4789579158316, 1013.3406813627255, 1075.202404809619, 1137.064128256513, 1198.9258517034068, 1260.7875751503007, 1322.6492985971945, 1384.5110220440881, 1446.372745490982, 1508.2344689378758, 1570.0961923847694, 1631.9579158316633, 1693.8196392785571, 1755.681362725451, 1817.5430861723446, 1879.4048096192384, 1941.2665330661323, 2003.1282565130261, 2064.9899799599198, 2126.8517034068136, 2188.7134268537075, 2250.5751503006013, 2312.436873747495, 2374.298597194389, 2436.1603206412824, 2498.0220440881762, 2559.88376753507, 2621.745490981964, 2683.607214428858, 2745.4689378757516, 2807.3306613226455, 2869.192384769539, 2931.0541082164327, 2992.9158316633266, 3054.7775551102204, 3116.6392785571143, 3178.501002004008, 3240.362725450902, 3302.224448897796, 3364.086172344689, 3425.947895791583, 3487.809619238477, 3549.6713426853707, 3611.5330661322646, 3673.3947895791584, 3735.2565130260523, 3797.1182364729457, 3858.9799599198395, 3920.8416833667334, 3982.703406813627, 4044.565130260521, 4106.426853707415, 4168.288577154309, 4230.150300601203, 4292.012024048096, 4353.87374749499, 4415.735470941884, 4477.597194388778, 4539.458917835671, 4601.320641282565, 4663.182364729459, 4725.0440881763525, 4786.905811623246, 4848.76753507014, 4910.629258517034, 4972.490981963928, 5034.352705410822, 5096.214428857716, 5158.076152304609, 5219.937875751503, 5281.799599198397, 5343.661322645291, 5405.523046092185, 5467.384769539078, 5529.246492985972, 5591.108216432865, 5652.969939879759, 5714.831663326653, 5776.693386773547, 5838.555110220441, 5900.416833667335, 5962.2785571142285, 6024.140280561122, 6086.002004008016, 6147.86372745491, 6209.725450901804, 6271.587174348698, 6333.448897795592, 6395.310621242485, 6457.172344689378, 6519.034068136272, 6580.895791583166, 6642.75751503006, 6704.619238476954, 6766.480961923848, 6828.3426853707415, 6890.204408817635, 6952.066132264529, 7013.927855711423, 7075.789579158317, 7137.651302605211, 7199.513026052105, 7261.374749498998, 7323.236472945891, 7385.098196392785, 7446.959919839679, 7508.821643286573, 7570.683366733467, 7632.545090180361, 7694.406813627254, 7756.268537074148, 7818.130260521042, 7879.991983967936, 7941.85370741483, 8003.715430861724, 8065.5771543086175, 8127.438877755511, 8189.300601202405, 8251.162324649298, 8313.024048096191, 8374.885771543086, 8436.74749498998, 8498.609218436874, 8560.470941883768, 8622.332665330661, 8684.194388777556, 8746.056112224449, 8807.917835671342, 8869.779559118237, 8931.64128256513, 8993.503006012024, 9055.364729458917, 9117.226452905812, 9179.088176352705, 9240.9498997996, 9302.811623246493, 9364.673346693387, 9426.53507014028, 9488.396793587175, 9550.258517034068, 9612.120240480963, 9673.981963927856, 9735.843687374749, 9797.705410821643, 9859.567134268536, 9921.428857715431, 9983.290581162324, 10045.152304609219, 10107.014028056112, 10168.875751503007, 10230.7374749499, 10292.599198396794, 10354.460921843687, 10416.322645290582, 10478.184368737475, 10540.04609218437, 10601.907815631263, 10663.769539078156, 10725.63126252505, 10787.492985971943, 10849.354709418838, 10911.21643286573, 10973.078156312626, 11034.939879759519, 11096.801603206413, 11158.663326653306, 11220.525050100201, 11282.386773547094, 11344.248496993989, 11406.110220440882, 11467.971943887776, 11529.83366733467, 11591.695390781562, 11653.557114228457, 11715.41883767535, 11777.280561122245, 11839.142284569138, 11901.004008016032, 11962.865731462925, 12024.72745490982, 12086.589178356713, 12148.450901803608, 12210.3126252505, 12272.174348697396, 12334.036072144288, 12395.897795591183, 12457.759519038076, 12519.62124248497, 12581.482965931864, 12643.344689378757, 12705.206412825652, 12767.068136272545, 12828.92985971944, 12890.791583166332, 12952.653306613227, 13014.51503006012, 13076.376753507015, 13138.238476953908, 13200.100200400802, 13261.961923847695, 13323.82364729459, 13385.685370741483, 13447.547094188376, 13509.40881763527, 13571.270541082164, 13633.132264529058, 13694.993987975951, 13756.855711422846, 13818.717434869739, 13880.579158316634, 13942.440881763527, 14004.302605210421, 14066.164328657314, 14128.02605210421, 14189.887775551102, 14251.749498997997, 14313.61122244489, 14375.472945891783, 14437.334669338677, 14499.19639278557, 14561.058116232465, 14622.919839679358, 14684.781563126253, 14746.643286573146, 14808.50501002004, 14870.366733466934, 14932.228456913828, 14994.090180360721, 15055.951903807616, 15117.813627254509, 15179.675350701404, 15241.537074148297, 15303.39879759519, 15365.260521042084, 15427.122244488977, 15488.983967935872, 15550.845691382765, 15612.70741482966, 15674.569138276553, 15736.430861723447, 15798.29258517034, 15860.154308617235, 15922.016032064128, 15983.877755511023, 16045.739478957916, 16107.60120240481, 16169.462925851703, 16231.324649298596, 16293.186372745491, 16355.048096192384, 16416.90981963928, 16478.77154308617, 16540.633266533066, 16602.49498997996, 16664.356713426852, 16726.218436873747, 16788.080160320642, 16849.941883767537, 16911.803607214428, 16973.665330661323, 17035.527054108217, 17097.388777555112, 17159.250501002003, 17221.112224448898, 17282.973947895793, 17344.835671342684, 17406.69739478958, 17468.559118236473, 17530.420841683368, 17592.28256513026, 17654.144288577154, 17716.00601202405, 17777.867735470943, 17839.729458917835, 17901.59118236473, 17963.452905811624, 18025.31462925852, 18087.17635270541, 18149.038076152305, 18210.8997995992, 18272.76152304609, 18334.623246492985, 18396.48496993988, 18458.346693386775, 18520.208416833666, 18582.07014028056, 18643.931863727455, 18705.79358717435, 18767.65531062124, 18829.517034068136, 18891.37875751503, 18953.240480961926, 19015.102204408817, 19076.96392785571, 19138.825651302606, 19200.687374749497, 19262.549098196392, 19324.410821643287, 19386.27254509018, 19448.134268537073, 19509.995991983968, 19571.857715430862, 19633.719438877757, 19695.581162324648, 19757.442885771543, 19819.304609218438, 19881.166332665332, 19943.028056112224, 20004.88977955912, 20066.751503006013, 20128.613226452904, 20190.4749498998, 20252.336673346694, 20314.19839679359, 20376.06012024048, 20437.921843687374, 20499.78356713427, 20561.645290581164, 20623.507014028055, 20685.36873747495, 20747.230460921844, 20809.09218436874, 20870.95390781563, 20932.815631262525, 20994.67735470942, 21056.53907815631, 21118.400801603206, 21180.2625250501, 21242.124248496995, 21303.985971943886, 21365.84769539078, 21427.709418837676, 21489.57114228457, 21551.43286573146, 21613.294589178357, 21675.15631262525, 21737.018036072146, 21798.879759519037, 21860.741482965932, 21922.603206412827, 21984.464929859718, 22046.326653306613, 22108.188376753507, 22170.050100200402, 22231.911823647293, 22293.773547094188, 22355.635270541083, 22417.496993987977, 22479.35871743487, 22541.220440881763, 22603.082164328658, 22664.943887775553, 22726.805611222444, 22788.66733466934, 22850.529058116234, 22912.390781563125, 22974.25250501002, 23036.114228456914, 23097.97595190381, 23159.8376753507, 23221.699398797595, 23283.56112224449, 23345.422845691384, 23407.284569138275, 23469.14629258517, 23531.008016032065, 23592.86973947896, 23654.73146292585, 23716.593186372746, 23778.45490981964, 23840.31663326653, 23902.178356713426, 23964.04008016032, 24025.901803607216, 24087.763527054107, 24149.625250501, 24211.486973947896, 24273.34869739479, 24335.210420841682, 24397.072144288577, 24458.93386773547, 24520.795591182366, 24582.657314629258, 24644.519038076152, 24706.380761523047, 24768.24248496994, 24830.104208416833, 24891.965931863728, 24953.827655310623, 25015.689378757514, 25077.55110220441, 25139.412825651303, 25201.274549098198, 25263.13627254509, 25324.997995991984, 25386.85971943888, 25448.721442885773, 25510.583166332664, 25572.44488977956, 25634.306613226454, 25696.168336673345, 25758.03006012024, 25819.891783567135, 25881.75350701403, 25943.61523046092, 26005.476953907815, 26067.33867735471, 26129.200400801605, 26191.062124248496, 26252.92384769539, 26314.785571142285, 26376.64729458918, 26438.50901803607, 26500.370741482966, 26562.23246492986, 26624.094188376752, 26685.955911823647, 26747.81763527054, 26809.679358717436, 26871.541082164327, 26933.402805611222, 26995.264529058117, 27057.12625250501, 27118.987975951903, 27180.849699398797, 27242.711422845692, 27304.573146292587, 27366.434869739478, 27428.296593186373, 27490.158316633268, 27552.02004008016, 27613.881763527053, 27675.743486973948, 27737.605210420843, 27799.466933867734, 27861.32865731463, 27923.190380761524, 27985.05210420842, 28046.91382765531, 28108.775551102204, 28170.6372745491, 28232.498997995994, 28294.360721442885, 28356.22244488978, 28418.084168336674, 28479.945891783565, 28541.80761523046, 28603.669338677355, 28665.53106212425, 28727.39278557114, 28789.254509018036, 28851.11623246493, 28912.977955911825, 28974.839679358716, 29036.70140280561, 29098.563126252506, 29160.4248496994, 29222.28657314629, 29284.148296593186, 29346.01002004008, 29407.871743486972, 29469.733466933867, 29531.59519038076, 29593.456913827657, 29655.318637274548, 29717.180360721442, 29779.042084168337, 29840.903807615232, 29902.765531062123, 29964.627254509018, 30026.488977955913, 30088.350701402807, 30150.2124248497, 30212.074148296593, 30273.935871743488, 30335.79759519038, 30397.659318637274, 30459.52104208417, 30521.382765531063, 30583.244488977954, 30645.10621242485, 30706.967935871744, 30768.82965931864, 30830.69138276553, 30892.553106212425, 30954.41482965932, 31016.276553106214, 31078.138276553105, 31140.0])
+              .range(['#008000ff', '#018100ff', '#028100ff', '#038200ff', '#048200ff', '#058300ff', '#068300ff', '#078400ff', '#088400ff', '#098500ff', '#0a8500ff', '#0b8600ff', '#0c8600ff', '#0d8700ff', '#0e8700ff', '#0f8800ff', '#108800ff', '#118900ff', '#128900ff', '#138a00ff', '#148a00ff', '#158b00ff', '#168b00ff', '#178c00ff', '#188c00ff', '#198d00ff', '#1a8d00ff', '#1b8e00ff', '#1c8e00ff', '#1d8f00ff', '#1e8f00ff', '#1f9000ff', '#209000ff', '#219100ff', '#229100ff', '#239200ff', '#249200ff', '#259300ff', '#269300ff', '#289400ff', '#299400ff', '#2a9500ff', '#2b9500ff', '#2c9600ff', '#2d9600ff', '#2e9700ff', '#2f9800ff', '#309800ff', '#319900ff', '#329900ff', '#339a00ff', '#349a00ff', '#359b00ff', '#369b00ff', '#379c00ff', '#389c00ff', '#399d00ff', '#3a9d00ff', '#3b9e00ff', '#3c9e00ff', '#3d9f00ff', '#3e9f00ff', '#3fa000ff', '#40a000ff', '#41a100ff', '#42a100ff', '#43a200ff', '#44a200ff', '#45a300ff', '#46a300ff', '#47a400ff', '#48a400ff', '#49a500ff', '#4aa500ff', '#4ba600ff', '#4ca600ff', '#4da700ff', '#4fa700ff', '#50a800ff', '#51a800ff', '#52a900ff', '#53a900ff', '#54aa00ff', '#55aa00ff', '#56ab00ff', '#57ab00ff', '#58ac00ff', '#59ac00ff', '#5aad00ff', '#5bad00ff', '#5cae00ff', '#5daf00ff', '#5eaf00ff', '#5fb000ff', '#60b000ff', '#61b100ff', '#62b100ff', '#63b200ff', '#64b200ff', '#65b300ff', '#66b300ff', '#67b400ff', '#68b400ff', '#69b500ff', '#6ab500ff', '#6bb600ff', '#6cb600ff', '#6db700ff', '#6eb700ff', '#6fb800ff', '#70b800ff', '#71b900ff', '#72b900ff', '#73ba00ff', '#74ba00ff', '#75bb00ff', '#77bb00ff', '#78bc00ff', '#79bc00ff', '#7abd00ff', '#7bbd00ff', '#7cbe00ff', '#7dbe00ff', '#7ebf00ff', '#7fbf00ff', '#80c000ff', '#81c000ff', '#82c100ff', '#83c100ff', '#84c200ff', '#85c200ff', '#86c300ff', '#87c300ff', '#88c400ff', '#89c400ff', '#8ac500ff', '#8bc500ff', '#8cc600ff', '#8dc700ff', '#8ec700ff', '#8fc800ff', '#90c800ff', '#91c900ff', '#92c900ff', '#93ca00ff', '#94ca00ff', '#95cb00ff', '#96cb00ff', '#97cc00ff', '#98cc00ff', '#99cd00ff', '#9acd00ff', '#9bce00ff', '#9cce00ff', '#9ecf00ff', '#9fcf00ff', '#a0d000ff', '#a1d000ff', '#a2d100ff', '#a3d100ff', '#a4d200ff', '#a5d200ff', '#a6d300ff', '#a7d300ff', '#a8d400ff', '#a9d400ff', '#aad500ff', '#abd500ff', '#acd600ff', '#add600ff', '#aed700ff', '#afd700ff', '#b0d800ff', '#b1d800ff', '#b2d900ff', '#b3d900ff', '#b4da00ff', '#b5da00ff', '#b6db00ff', '#b7db00ff', '#b8dc00ff', '#b9dc00ff', '#badd00ff', '#bbde00ff', '#bcde00ff', '#bddf00ff', '#bedf00ff', '#bfe000ff', '#c0e000ff', '#c1e100ff', '#c2e100ff', '#c3e200ff', '#c5e200ff', '#c6e300ff', '#c7e300ff', '#c8e400ff', '#c9e400ff', '#cae500ff', '#cbe500ff', '#cce600ff', '#cde600ff', '#cee700ff', '#cfe700ff', '#d0e800ff', '#d1e800ff', '#d2e900ff', '#d3e900ff', '#d4ea00ff', '#d5ea00ff', '#d6eb00ff', '#d7eb00ff', '#d8ec00ff', '#d9ec00ff', '#daed00ff', '#dbed00ff', '#dcee00ff', '#ddee00ff', '#deef00ff', '#dfef00ff', '#e0f000ff', '#e1f000ff', '#e2f100ff', '#e3f100ff', '#e4f200ff', '#e5f200ff', '#e6f300ff', '#e7f300ff', '#e8f400ff', '#e9f500ff', '#eaf500ff', '#ebf600ff', '#edf600ff', '#eef700ff', '#eff700ff', '#f0f800ff', '#f1f800ff', '#f2f900ff', '#f3f900ff', '#f4fa00ff', '#f5fa00ff', '#f6fb00ff', '#f7fb00ff', '#f8fc00ff', '#f9fc00ff', '#fafd00ff', '#fbfd00ff', '#fcfe00ff', '#fdfe00ff', '#feff00ff', '#ffff00ff', '#ffff00ff', '#fffe00ff', '#fffd00ff', '#fffc00ff', '#fffb00ff', '#fffa00ff', '#fff900ff', '#fff800ff', '#fff700ff', '#fff600ff', '#fff500ff', '#fff400ff', '#fff300ff', '#fff200ff', '#fff100ff', '#fff000ff', '#ffef00ff', '#ffee00ff', '#ffed00ff', '#ffeb00ff', '#ffea00ff', '#ffe900ff', '#ffe800ff', '#ffe700ff', '#ffe600ff', '#ffe500ff', '#ffe400ff', '#ffe300ff', '#ffe200ff', '#ffe100ff', '#ffe000ff', '#ffdf00ff', '#ffde00ff', '#ffdd00ff', '#ffdc00ff', '#ffdb00ff', '#ffda00ff', '#ffd900ff', '#ffd800ff', '#ffd700ff', '#ffd600ff', '#ffd500ff', '#ffd400ff', '#ffd300ff', '#ffd200ff', '#ffd100ff', '#ffd000ff', '#ffcf00ff', '#ffce00ff', '#ffcd00ff', '#ffcc00ff', '#ffcb00ff', '#ffca00ff', '#ffc900ff', '#ffc800ff', '#ffc700ff', '#ffc600ff', '#ffc500ff', '#ffc300ff', '#ffc200ff', '#ffc100ff', '#ffc000ff', '#ffbf00ff', '#ffbe00ff', '#ffbd00ff', '#ffbc00ff', '#ffbb00ff', '#ffba00ff', '#ffb900ff', '#ffb800ff', '#ffb700ff', '#ffb600ff', '#ffb500ff', '#ffb400ff', '#ffb300ff', '#ffb200ff', '#ffb100ff', '#ffb000ff', '#ffaf00ff', '#ffae00ff', '#ffad00ff', '#ffac00ff', '#ffab00ff', '#ffaa00ff', '#ffa900ff', '#ffa800ff', '#ffa700ff', '#ffa600ff', '#ffa500ff', '#ffa400ff', '#ffa300ff', '#ffa200ff', '#ffa100ff', '#ffa000ff', '#ff9f00ff', '#ff9e00ff', '#ff9c00ff', '#ff9b00ff', '#ff9a00ff', '#ff9900ff', '#ff9800ff', '#ff9700ff', '#ff9600ff', '#ff9500ff', '#ff9400ff', '#ff9300ff', '#ff9200ff', '#ff9100ff', '#ff9000ff', '#ff8f00ff', '#ff8e00ff', '#ff8d00ff', '#ff8c00ff', '#ff8b00ff', '#ff8a00ff', '#ff8900ff', '#ff8800ff', '#ff8700ff', '#ff8600ff', '#ff8500ff', '#ff8400ff', '#ff8300ff', '#ff8200ff', '#ff8100ff', '#ff8000ff', '#ff7f00ff', '#ff7e00ff', '#ff7d00ff', '#ff7c00ff', '#ff7b00ff', '#ff7a00ff', '#ff7900ff', '#ff7800ff', '#ff7700ff', '#ff7500ff', '#ff7400ff', '#ff7300ff', '#ff7200ff', '#ff7100ff', '#ff7000ff', '#ff6f00ff', '#ff6e00ff', '#ff6d00ff', '#ff6c00ff', '#ff6b00ff', '#ff6a00ff', '#ff6900ff', '#ff6800ff', '#ff6700ff', '#ff6600ff', '#ff6500ff', '#ff6400ff', '#ff6300ff', '#ff6200ff', '#ff6100ff', '#ff6000ff', '#ff5f00ff', '#ff5e00ff', '#ff5d00ff', '#ff5c00ff', '#ff5b00ff', '#ff5a00ff', '#ff5900ff', '#ff5800ff', '#ff5700ff', '#ff5600ff', '#ff5500ff', '#ff5400ff', '#ff5300ff', '#ff5200ff', '#ff5100ff', '#ff5000ff', '#ff4f00ff', '#ff4d00ff', '#ff4c00ff', '#ff4b00ff', '#ff4a00ff', '#ff4900ff', '#ff4800ff', '#ff4700ff', '#ff4600ff', '#ff4500ff', '#ff4400ff', '#ff4300ff', '#ff4200ff', '#ff4100ff', '#ff4000ff', '#ff3f00ff', '#ff3e00ff', '#ff3d00ff', '#ff3c00ff', '#ff3b00ff', '#ff3a00ff', '#ff3900ff', '#ff3800ff', '#ff3700ff', '#ff3600ff', '#ff3500ff', '#ff3400ff', '#ff3300ff', '#ff3200ff', '#ff3100ff', '#ff3000ff', '#ff2f00ff', '#ff2e00ff', '#ff2d00ff', '#ff2c00ff', '#ff2b00ff', '#ff2a00ff', '#ff2900ff', '#ff2800ff', '#ff2600ff', '#ff2500ff', '#ff2400ff', '#ff2300ff', '#ff2200ff', '#ff2100ff', '#ff2000ff', '#ff1f00ff', '#ff1e00ff', '#ff1d00ff', '#ff1c00ff', '#ff1b00ff', '#ff1a00ff', '#ff1900ff', '#ff1800ff', '#ff1700ff', '#ff1600ff', '#ff1500ff', '#ff1400ff', '#ff1300ff', '#ff1200ff', '#ff1100ff', '#ff1000ff', '#ff0f00ff', '#ff0e00ff', '#ff0d00ff', '#ff0c00ff', '#ff0b00ff', '#ff0a00ff', '#ff0900ff', '#ff0800ff', '#ff0700ff', '#ff0600ff', '#ff0500ff', '#ff0400ff', '#ff0300ff', '#ff0200ff', '#ff0100ff', '#ff0000ff']);
+    
+
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.x = d3.scale.linear()
+              .domain([271.0, 31140.0])
+              .range([0, 450 - 50]);
+
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.legend = L.control({position: 'topright'});
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.legend.addTo(map_9d023f8b922481ea05a93c9ea088aa8c);
+
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.xAxis = d3.svg.axis()
+        .scale(color_map_259db7e744dcfedf663b6f5ba8d8e2bc.x)
+        .orient("top")
+        .tickSize(1)
+        .tickValues([271.0, 15705.5, 31140.0]);
+
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.svg = d3.select(".legend.leaflet-control").append("svg")
+        .attr("id", 'legend')
+        .attr("width", 450)
+        .attr("height", 40);
+
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.g = color_map_259db7e744dcfedf663b6f5ba8d8e2bc.svg.append("g")
+        .attr("class", "key")
+        .attr("fill", "black")
+        .attr("transform", "translate(25,16)");
+
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.g.selectAll("rect")
+        .data(color_map_259db7e744dcfedf663b6f5ba8d8e2bc.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_259db7e744dcfedf663b6f5ba8d8e2bc.x(color_map_259db7e744dcfedf663b6f5ba8d8e2bc.color.domain()[i - 1]) : color_map_259db7e744dcfedf663b6f5ba8d8e2bc.x.range()[0],
+            x1: i < color_map_259db7e744dcfedf663b6f5ba8d8e2bc.color.domain().length ? color_map_259db7e744dcfedf663b6f5ba8d8e2bc.x(color_map_259db7e744dcfedf663b6f5ba8d8e2bc.color.domain()[i]) : color_map_259db7e744dcfedf663b6f5ba8d8e2bc.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append("rect")
+        .attr("height", 40 - 30)
+        .attr("x", function(d) { return d.x0; })
+        .attr("width", function(d) { return d.x1 - d.x0; })
+        .style("fill", function(d) { return d.z; });
+
+    color_map_259db7e744dcfedf663b6f5ba8d8e2bc.g.call(color_map_259db7e744dcfedf663b6f5ba8d8e2bc.xAxis).append("text")
+        .attr("class", "caption")
+        .attr("y", 21)
+        .attr("fill", "black")
+        .text("Number of Patients");
+    
+            var marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_04c42b5b49d903be00ee10879f9c5c23 = L.circleMarker(
+                [30.2672, -97.7431],
+                {"bubblingMouseEvents": true, "color": "#8bc600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8bc600ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.53700831867571, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_efcd6b7fee21c261d2006d628b7abbb7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ecdb693fc71ea88da1b63d476464f2f7 = $(`<div id="html_ecdb693fc71ea88da1b63d476464f2f7" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Austin</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>8,709</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>30.2672</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-97.7431</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>3.1%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_efcd6b7fee21c261d2006d628b7abbb7.setContent(html_ecdb693fc71ea88da1b63d476464f2f7);
+            
+        
+
+        circle_marker_04c42b5b49d903be00ee10879f9c5c23.bindPopup(popup_efcd6b7fee21c261d2006d628b7abbb7)
+        ;
+
+        
+    
+    
+            circle_marker_04c42b5b49d903be00ee10879f9c5c23.bindTooltip(
+                `<div>
+                     Austin: 8,709 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fb655a6c47288e4aff8a542303cbfbc3 = L.circleMarker(
+                [39.2904, -76.6122],
+                {"bubblingMouseEvents": true, "color": "#1f9000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1f9000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.84272564502281, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_0bf727a045120e713a97b2347ebd15cb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_161059bf523166c567eaf7d3eb528002 = $(`<div id="html_161059bf523166c567eaf7d3eb528002" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Baltimore</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>2,161</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>39.2904</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-76.6122</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>0.8%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_0bf727a045120e713a97b2347ebd15cb.setContent(html_161059bf523166c567eaf7d3eb528002);
+            
+        
+
+        circle_marker_fb655a6c47288e4aff8a542303cbfbc3.bindPopup(popup_0bf727a045120e713a97b2347ebd15cb)
+        ;
+
+        
+    
+    
+            circle_marker_fb655a6c47288e4aff8a542303cbfbc3.bindTooltip(
+                `<div>
+                     Baltimore: 2,161 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c909d4893ba67f1c82cdc2cd5116e871 = L.circleMarker(
+                [42.3601, -71.0589],
+                {"bubblingMouseEvents": true, "color": "#249200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#249200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.09166019226249, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_a5453f64c53f33be415a6be2a909db85 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_118608144595ebfb066f663afb11fb7e = $(`<div id="html_118608144595ebfb066f663afb11fb7e" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Boston</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>2,458</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>42.3601</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-71.0589</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>0.9%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_a5453f64c53f33be415a6be2a909db85.setContent(html_118608144595ebfb066f663afb11fb7e);
+            
+        
+
+        circle_marker_c909d4893ba67f1c82cdc2cd5116e871.bindPopup(popup_a5453f64c53f33be415a6be2a909db85)
+        ;
+
+        
+    
+    
+            circle_marker_c909d4893ba67f1c82cdc2cd5116e871.bindTooltip(
+                `<div>
+                     Boston: 2,458 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f3dae4daa66d82388246a398af9a9821 = L.circleMarker(
+                [35.2271, -80.8431],
+                {"bubblingMouseEvents": true, "color": "#90c800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#90c800ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.590638165773647, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_3620fec7a85f0301b6888a6439cf34a5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0b67adc37c356e75fd017e007e9e6a34 = $(`<div id="html_0b67adc37c356e75fd017e007e9e6a34" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Charlotte</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>8,954</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>35.2271</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-80.8431</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>3.2%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_3620fec7a85f0301b6888a6439cf34a5.setContent(html_0b67adc37c356e75fd017e007e9e6a34);
+            
+        
+
+        circle_marker_f3dae4daa66d82388246a398af9a9821.bindPopup(popup_3620fec7a85f0301b6888a6439cf34a5)
+        ;
+
+        
+    
+    
+            circle_marker_f3dae4daa66d82388246a398af9a9821.bindTooltip(
+                `<div>
+                     Charlotte: 8,954 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4c68b8ecaa6576bcbf5d0c129decd07c = L.circleMarker(
+                [41.8781, -87.6298],
+                {"bubblingMouseEvents": true, "color": "#ff0000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff0000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 25.0, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_bd1aa1d23b41ddd52a9cb3562d5a16c7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ea1df99940eacfc131c093dd94c91f94 = $(`<div id="html_ea1df99940eacfc131c093dd94c91f94" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Chicago</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>31,140</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>41.8781</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-87.6298</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>11.1%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_bd1aa1d23b41ddd52a9cb3562d5a16c7.setContent(html_ea1df99940eacfc131c093dd94c91f94);
+            
+        
+
+        circle_marker_4c68b8ecaa6576bcbf5d0c129decd07c.bindPopup(popup_bd1aa1d23b41ddd52a9cb3562d5a16c7)
+        ;
+
+        
+    
+    
+            circle_marker_4c68b8ecaa6576bcbf5d0c129decd07c.bindTooltip(
+                `<div>
+                     Chicago: 31,140 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f8c047b456a01f071fcb15371296fa9d = L.circleMarker(
+                [39.9612, -82.9988],
+                {"bubblingMouseEvents": true, "color": "#68b400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#68b400ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.989536556630192, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_92836a2d6a70f37f5a62a5a54082681f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7efe305d25714b735ac9cc827a65c7ab = $(`<div id="html_7efe305d25714b735ac9cc827a65c7ab" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Columbus</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>6,561</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>39.9612</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-82.9988</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>2.3%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_92836a2d6a70f37f5a62a5a54082681f.setContent(html_7efe305d25714b735ac9cc827a65c7ab);
+            
+        
+
+        circle_marker_f8c047b456a01f071fcb15371296fa9d.bindPopup(popup_92836a2d6a70f37f5a62a5a54082681f)
+        ;
+
+        
+    
+    
+            circle_marker_f8c047b456a01f071fcb15371296fa9d.bindTooltip(
+                `<div>
+                     Columbus: 6,561 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_75a02cb157c93170688a66c2092cde6c = L.circleMarker(
+                [32.7767, -96.797],
+                {"bubblingMouseEvents": true, "color": "#50a800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#50a800ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.517318005834536, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_ba517c51c7e10250e7e1384a6fe2c7d8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2d8fb064cc69f78830201149939cfd58 = $(`<div id="html_2d8fb064cc69f78830201149939cfd58" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Dallas</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>5,139</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>32.7767</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-96.7970</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.8%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_ba517c51c7e10250e7e1384a6fe2c7d8.setContent(html_2d8fb064cc69f78830201149939cfd58);
+            
+        
+
+        circle_marker_75a02cb157c93170688a66c2092cde6c.bindPopup(popup_ba517c51c7e10250e7e1384a6fe2c7d8)
+        ;
+
+        
+    
+    
+            circle_marker_75a02cb157c93170688a66c2092cde6c.bindTooltip(
+                `<div>
+                     Dallas: 5,139 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_30b73f21d7537ff4258e595b87847e5c = L.circleMarker(
+                [39.7392, -104.9903],
+                {"bubblingMouseEvents": true, "color": "#289400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#289400ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.298786454853303, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_1af103585901e6b29e6db2295850005c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_91d070d247344c6ec84a151aae579651 = $(`<div id="html_91d070d247344c6ec84a151aae579651" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Denver</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>2,736</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>39.7392</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-104.9903</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.0%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_1af103585901e6b29e6db2295850005c.setContent(html_91d070d247344c6ec84a151aae579651);
+            
+        
+
+        circle_marker_30b73f21d7537ff4258e595b87847e5c.bindPopup(popup_1af103585901e6b29e6db2295850005c)
+        ;
+
+        
+    
+    
+            circle_marker_30b73f21d7537ff4258e595b87847e5c.bindTooltip(
+                `<div>
+                     Denver: 2,736 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fc2cd06761cf34c8a59636dea2b75202 = L.circleMarker(
+                [42.3314, -83.0458],
+                {"bubblingMouseEvents": true, "color": "#229100ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#229100ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.003156403822338, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_a046cbe27e29a4659ac5a8f0b1fde38d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cff61d3b204676e8657e366c0a3c8781 = $(`<div id="html_cff61d3b204676e8657e366c0a3c8781" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Detroit</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>2,348</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>42.3314</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-83.0458</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>0.8%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_a046cbe27e29a4659ac5a8f0b1fde38d.setContent(html_cff61d3b204676e8657e366c0a3c8781);
+            
+        
+
+        circle_marker_fc2cd06761cf34c8a59636dea2b75202.bindPopup(popup_a046cbe27e29a4659ac5a8f0b1fde38d)
+        ;
+
+        
+    
+    
+            circle_marker_fc2cd06761cf34c8a59636dea2b75202.bindTooltip(
+                `<div>
+                     Detroit: 2,348 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4d760ba082982bc01a5c206b571497e5 = L.circleMarker(
+                [31.7619, -106.485],
+                {"bubblingMouseEvents": true, "color": "#259300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#259300ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.15128687929233, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_69e2c81235ce529aacdde1a008e36e03 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cd4d47e051d507c7017d3393a19e25e9 = $(`<div id="html_cd4d47e051d507c7017d3393a19e25e9" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>El Paso</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>2,535</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>31.7619</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-106.4850</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>0.9%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_69e2c81235ce529aacdde1a008e36e03.setContent(html_cd4d47e051d507c7017d3393a19e25e9);
+            
+        
+
+        circle_marker_4d760ba082982bc01a5c206b571497e5.bindPopup(popup_69e2c81235ce529aacdde1a008e36e03)
+        ;
+
+        
+    
+    
+            circle_marker_4d760ba082982bc01a5c206b571497e5.bindTooltip(
+                `<div>
+                     El Paso: 2,535 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1b41d94f14e901c0b3195eab83487f8e = L.circleMarker(
+                [32.7555, -97.3308],
+                {"bubblingMouseEvents": true, "color": "#3b9d00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#3b9d00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.949512885278946, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_ba6be902377324eee021d08906aeb370 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1c5cda8aff70988f6bedbe20f3bc3e1a = $(`<div id="html_1c5cda8aff70988f6bedbe20f3bc3e1a" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Fort Worth</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>3,831</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>32.7555</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-97.3308</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.4%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_ba6be902377324eee021d08906aeb370.setContent(html_1c5cda8aff70988f6bedbe20f3bc3e1a);
+            
+        
+
+        circle_marker_1b41d94f14e901c0b3195eab83487f8e.bindPopup(popup_ba6be902377324eee021d08906aeb370)
+        ;
+
+        
+    
+    
+            circle_marker_1b41d94f14e901c0b3195eab83487f8e.bindTooltip(
+                `<div>
+                     Fort Worth: 3,831 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_14f8c6421671f233f394d0e681aab9dc = L.circleMarker(
+                [29.7604, -95.3698],
+                {"bubblingMouseEvents": true, "color": "#ff3a00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff3a00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 24.768682502047458, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_5380594e22919b329dcf53aa51eb50f0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a385daccfe3c2a03fa610c3d0978e2fe = $(`<div id="html_a385daccfe3c2a03fa610c3d0978e2fe" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Houston</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>27,628</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>29.7604</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-95.3698</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>9.8%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_5380594e22919b329dcf53aa51eb50f0.setContent(html_a385daccfe3c2a03fa610c3d0978e2fe);
+            
+        
+
+        circle_marker_14f8c6421671f233f394d0e681aab9dc.bindPopup(popup_5380594e22919b329dcf53aa51eb50f0)
+        ;
+
+        
+    
+    
+            circle_marker_14f8c6421671f233f394d0e681aab9dc.bindTooltip(
+                `<div>
+                     Houston: 27,628 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_29988bdc74c75ad18e8b45d16f589edb = L.circleMarker(
+                [39.7684, -86.1581],
+                {"bubblingMouseEvents": true, "color": "#339a00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#339a00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.71481645293, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_591ec873bae055c33f2ef48879483a05 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5ffa462bf12fd4eb62cef4b6b7d7bb91 = $(`<div id="html_5ffa462bf12fd4eb62cef4b6b7d7bb91" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Indianapolis</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>3,393</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>39.7684</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-86.1581</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.2%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_591ec873bae055c33f2ef48879483a05.setContent(html_5ffa462bf12fd4eb62cef4b6b7d7bb91);
+            
+        
+
+        circle_marker_29988bdc74c75ad18e8b45d16f589edb.bindPopup(popup_591ec873bae055c33f2ef48879483a05)
+        ;
+
+        
+    
+    
+            circle_marker_29988bdc74c75ad18e8b45d16f589edb.bindTooltip(
+                `<div>
+                     Indianapolis: 3,393 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_01b54d321566b066f57af6f6d58889fd = L.circleMarker(
+                [30.3322, -81.6557],
+                {"bubblingMouseEvents": true, "color": "#4fa800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4fa800ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.491949794459295, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_f238d8fbb4bcb52af2d0d59211360468 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7acfd100b1916f850c790d773de94ba4 = $(`<div id="html_7acfd100b1916f850c790d773de94ba4" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Jacksonville</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>5,072</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>30.3322</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-81.6557</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.8%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_f238d8fbb4bcb52af2d0d59211360468.setContent(html_7acfd100b1916f850c790d773de94ba4);
+            
+        
+
+        circle_marker_01b54d321566b066f57af6f6d58889fd.bindPopup(popup_f238d8fbb4bcb52af2d0d59211360468)
+        ;
+
+        
+    
+    
+            circle_marker_01b54d321566b066f57af6f6d58889fd.bindTooltip(
+                `<div>
+                     Jacksonville: 5,072 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_41503dc83590442ff7759d0374870dde = L.circleMarker(
+                [36.1699, -115.1398],
+                {"bubblingMouseEvents": true, "color": "#b3da00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#b3da00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.007340337123246, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_1ad5dd812dd9906c84b891e46e9e311b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c252e412799179da66967308bf16e38b = $(`<div id="html_c252e412799179da66967308bf16e38b" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Las Vegas</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>11,108</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>36.1699</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-115.1398</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>4.0%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_1ad5dd812dd9906c84b891e46e9e311b.setContent(html_c252e412799179da66967308bf16e38b);
+            
+        
+
+        circle_marker_41503dc83590442ff7759d0374870dde.bindPopup(popup_1ad5dd812dd9906c84b891e46e9e311b)
+        ;
+
+        
+    
+    
+            circle_marker_41503dc83590442ff7759d0374870dde.bindTooltip(
+                `<div>
+                     Las Vegas: 11,108 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f30c876283b1927501cab854e7362693 = L.circleMarker(
+                [34.0522, -118.2437],
+                {"bubblingMouseEvents": true, "color": "#e6f300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e6f300ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.475920519396684, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_7298ac80ff492e4174f727f3fc879408 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4a279b677ec850c472b0a1152d6c06a2 = $(`<div id="html_4a279b677ec850c472b0a1152d6c06a2" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Los Angeles</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>14,155</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>34.0522</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-118.2437</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>5.0%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_7298ac80ff492e4174f727f3fc879408.setContent(html_4a279b677ec850c472b0a1152d6c06a2);
+            
+        
+
+        circle_marker_f30c876283b1927501cab854e7362693.bindPopup(popup_7298ac80ff492e4174f727f3fc879408)
+        ;
+
+        
+    
+    
+            circle_marker_f30c876283b1927501cab854e7362693.bindTooltip(
+                `<div>
+                     Los Angeles: 14,155 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dc9a2e3f5fe02544222dfd7d89e3b90c = L.circleMarker(
+                [38.2527, -85.7585],
+                {"bubblingMouseEvents": true, "color": "#44a200ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#44a200ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.230773145491813, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_5480ad18c6e3283736aefc880edc7d27 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_78c5c32c06bc9d94129fd7a1d4963579 = $(`<div id="html_78c5c32c06bc9d94129fd7a1d4963579" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Louisville</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>4,431</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>38.2527</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-85.7585</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.6%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_5480ad18c6e3283736aefc880edc7d27.setContent(html_78c5c32c06bc9d94129fd7a1d4963579);
+            
+        
+
+        circle_marker_dc9a2e3f5fe02544222dfd7d89e3b90c.bindPopup(popup_5480ad18c6e3283736aefc880edc7d27)
+        ;
+
+        
+    
+    
+            circle_marker_dc9a2e3f5fe02544222dfd7d89e3b90c.bindTooltip(
+                `<div>
+                     Louisville: 4,431 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3d8e5e627a918b71053e01abf22d38b6 = L.circleMarker(
+                [35.1495, -90.049],
+                {"bubblingMouseEvents": true, "color": "#48a400ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#48a400ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.314025102603075, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_dd04be559742b844f9849f89295b00d8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b9e9b01840fd4b6c84d124ebcac4008a = $(`<div id="html_b9e9b01840fd4b6c84d124ebcac4008a" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Memphis</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>4,626</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>35.1495</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-90.0490</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.6%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_dd04be559742b844f9849f89295b00d8.setContent(html_b9e9b01840fd4b6c84d124ebcac4008a);
+            
+        
+
+        circle_marker_3d8e5e627a918b71053e01abf22d38b6.bindPopup(popup_dd04be559742b844f9849f89295b00d8)
+        ;
+
+        
+    
+    
+            circle_marker_3d8e5e627a918b71053e01abf22d38b6.bindTooltip(
+                `<div>
+                     Memphis: 4,626 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2fa7558a57d934c237cf9f94d53dd984 = L.circleMarker(
+                [36.1627, -86.7816],
+                {"bubblingMouseEvents": true, "color": "#269300ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#269300ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.202457096417902, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_8898629e7b4f5cccb1ffcac97759b1d5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7173c222d656de1a062c95b34a6fe392 = $(`<div id="html_7173c222d656de1a062c95b34a6fe392" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Nashville</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>2,603</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>36.1627</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-86.7816</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>0.9%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_8898629e7b4f5cccb1ffcac97759b1d5.setContent(html_7173c222d656de1a062c95b34a6fe392);
+            
+        
+
+        circle_marker_2fa7558a57d934c237cf9f94d53dd984.bindPopup(popup_8898629e7b4f5cccb1ffcac97759b1d5)
+        ;
+
+        
+    
+    
+            circle_marker_2fa7558a57d934c237cf9f94d53dd984.bindTooltip(
+                `<div>
+                     Nashville: 2,603 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f0ddf2cc9817d0cf134f04cc1f28a3fb = L.circleMarker(
+                [40.7128, -74.006],
+                {"bubblingMouseEvents": true, "color": "#ff1600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff1600ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 24.91367665413081, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_b4f4b6f27f95fcbb1b63f0c07a54b4a1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7d9c32402658748138edd5ad5988cddb = $(`<div id="html_7d9c32402658748138edd5ad5988cddb" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>New York</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>29,780</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>40.7128</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-74.0060</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>10.6%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_b4f4b6f27f95fcbb1b63f0c07a54b4a1.setContent(html_7d9c32402658748138edd5ad5988cddb);
+            
+        
+
+        circle_marker_f0ddf2cc9817d0cf134f04cc1f28a3fb.bindPopup(popup_b4f4b6f27f95fcbb1b63f0c07a54b4a1)
+        ;
+
+        
+    
+    
+            circle_marker_f0ddf2cc9817d0cf134f04cc1f28a3fb.bindTooltip(
+                `<div>
+                     New York: 29,780 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0b18591d3e321e2a9f8c1812d48bdc9a = L.circleMarker(
+                [35.4676, -97.5164],
+                {"bubblingMouseEvents": true, "color": "#f5fa00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f5fa00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.59751722604731, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_d5d8c018b1709fde8534a226900f0b87 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_407a0f2bf5b2e01354f79015de36e6cf = $(`<div id="html_407a0f2bf5b2e01354f79015de36e6cf" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Oklahoma City</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>15,074</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>35.4676</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-97.5164</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>5.4%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_d5d8c018b1709fde8534a226900f0b87.setContent(html_407a0f2bf5b2e01354f79015de36e6cf);
+            
+        
+
+        circle_marker_0b18591d3e321e2a9f8c1812d48bdc9a.bindPopup(popup_d5d8c018b1709fde8534a226900f0b87)
+        ;
+
+        
+    
+    
+            circle_marker_0b18591d3e321e2a9f8c1812d48bdc9a.bindTooltip(
+                `<div>
+                     Oklahoma City: 15,074 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5f981dec24611215b4c55e610edcee8c = L.circleMarker(
+                [39.9526, -75.1652],
+                {"bubblingMouseEvents": true, "color": "#5daf00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#5daf00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 21.789171113098643, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_4ba2ab38dfec4c3bc7a92758165a2d04 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_80637ae392a6671cfc0fc8cb3af9565a = $(`<div id="html_80637ae392a6671cfc0fc8cb3af9565a" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Philadelphia</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>5,915</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>39.9526</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-75.1652</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>2.1%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_4ba2ab38dfec4c3bc7a92758165a2d04.setContent(html_80637ae392a6671cfc0fc8cb3af9565a);
+            
+        
+
+        circle_marker_5f981dec24611215b4c55e610edcee8c.bindPopup(popup_4ba2ab38dfec4c3bc7a92758165a2d04)
+        ;
+
+        
+    
+    
+            circle_marker_5f981dec24611215b4c55e610edcee8c.bindTooltip(
+                `<div>
+                     Philadelphia: 5,915 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_bc7c0b477cd09874c760442030645979 = L.circleMarker(
+                [33.4484, -112.074],
+                {"bubblingMouseEvents": true, "color": "#ffe000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.895464305801106, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_1809685c5a65b8b945a4f834484ed175 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_31782695aa0f9ce9a79160e40381ac1a = $(`<div id="html_31782695aa0f9ce9a79160e40381ac1a" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Phoenix</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>17,586</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>33.4484</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-112.0740</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>6.3%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_1809685c5a65b8b945a4f834484ed175.setContent(html_31782695aa0f9ce9a79160e40381ac1a);
+            
+        
+
+        circle_marker_bc7c0b477cd09874c760442030645979.bindPopup(popup_1809685c5a65b8b945a4f834484ed175)
+        ;
+
+        
+    
+    
+            circle_marker_bc7c0b477cd09874c760442030645979.bindTooltip(
+                `<div>
+                     Phoenix: 17,586 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f8e6e006c04b74166cf6f758c5d158b = L.circleMarker(
+                [45.5051, -122.675],
+                {"bubblingMouseEvents": true, "color": "#008000ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#008000ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.829275655712555, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_f0b940e00874afaa8b5c536ba524a975 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2dc0c01bb05251646902fae952353a39 = $(`<div id="html_2dc0c01bb05251646902fae952353a39" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Portland</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>271</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>45.5051</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-122.6750</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>0.1%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_f0b940e00874afaa8b5c536ba524a975.setContent(html_2dc0c01bb05251646902fae952353a39);
+            
+        
+
+        circle_marker_2f8e6e006c04b74166cf6f758c5d158b.bindPopup(popup_f0b940e00874afaa8b5c536ba524a975)
+        ;
+
+        
+    
+    
+            circle_marker_2f8e6e006c04b74166cf6f758c5d158b.bindTooltip(
+                `<div>
+                     Portland: 271 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1a12b27c9c9c7056df51c3f8319eac82 = L.circleMarker(
+                [29.4241, -98.4936],
+                {"bubblingMouseEvents": true, "color": "#94ca00ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#94ca00ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.64387062486199, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_bf8ad227982f6f2b81a964ae44cc333d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_18645f054186735bcf3d178c1f2ffdf8 = $(`<div id="html_18645f054186735bcf3d178c1f2ffdf8" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>San Antonio</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>9,204</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>29.4241</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-98.4936</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>3.3%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_bf8ad227982f6f2b81a964ae44cc333d.setContent(html_18645f054186735bcf3d178c1f2ffdf8);
+            
+        
+
+        circle_marker_1a12b27c9c9c7056df51c3f8319eac82.bindPopup(popup_bf8ad227982f6f2b81a964ae44cc333d)
+        ;
+
+        
+    
+    
+            circle_marker_1a12b27c9c9c7056df51c3f8319eac82.bindTooltip(
+                `<div>
+                     San Antonio: 9,204 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8b55dc483aa6bb86a7512aae27da024d = L.circleMarker(
+                [32.7157, -117.1611],
+                {"bubblingMouseEvents": true, "color": "#cae500ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#cae500ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 23.229678792041653, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_77aafd6c37dfffcab819bafea46de9e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_78a5211da014d48ac322249dfebe1bc3 = $(`<div id="html_78a5211da014d48ac322249dfebe1bc3" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>San Diego</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>12,462</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>32.7157</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-117.1611</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>4.4%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_77aafd6c37dfffcab819bafea46de9e9.setContent(html_78a5211da014d48ac322249dfebe1bc3);
+            
+        
+
+        circle_marker_8b55dc483aa6bb86a7512aae27da024d.bindPopup(popup_77aafd6c37dfffcab819bafea46de9e9)
+        ;
+
+        
+    
+    
+            circle_marker_8b55dc483aa6bb86a7512aae27da024d.bindTooltip(
+                `<div>
+                     San Diego: 12,462 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_57572772beb5a43e3097eb24061f8162 = L.circleMarker(
+                [37.7749, -122.4194],
+                {"bubblingMouseEvents": true, "color": "#309800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#309800ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.598586114387533, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_8bb090786395f5da7e57bae5dd12d1aa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9436249f467ed9dd38e6c82c3e5a219e = $(`<div id="html_9436249f467ed9dd38e6c82c3e5a219e" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>San Francisco</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>3,195</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>37.7749</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-122.4194</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.1%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_8bb090786395f5da7e57bae5dd12d1aa.setContent(html_9436249f467ed9dd38e6c82c3e5a219e);
+            
+        
+
+        circle_marker_57572772beb5a43e3097eb24061f8162.bindPopup(popup_8bb090786395f5da7e57bae5dd12d1aa)
+        ;
+
+        
+    
+    
+            circle_marker_57572772beb5a43e3097eb24061f8162.bindTooltip(
+                `<div>
+                     San Francisco: 3,195 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_76d0fddbac07694d53cdfa9f6ae80887 = L.circleMarker(
+                [37.3382, -121.8863],
+                {"bubblingMouseEvents": true, "color": "#71b800ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#71b800ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 22.138340205579595, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_575f3e2904b47c1ecf42f8a50b9eebe4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_07b09c82a1dd3f5c00c6b47fab9ffc2e = $(`<div id="html_07b09c82a1dd3f5c00c6b47fab9ffc2e" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>San Jose</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>7,086</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>37.3382</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-121.8863</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>2.5%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_575f3e2904b47c1ecf42f8a50b9eebe4.setContent(html_07b09c82a1dd3f5c00c6b47fab9ffc2e);
+            
+        
+
+        circle_marker_76d0fddbac07694d53cdfa9f6ae80887.bindPopup(popup_575f3e2904b47c1ecf42f8a50b9eebe4)
+        ;
+
+        
+    
+    
+            circle_marker_76d0fddbac07694d53cdfa9f6ae80887.bindTooltip(
+                `<div>
+                     San Jose: 7,086 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c73dec929758c511a4fe7ea1ba7b3c31 = L.circleMarker(
+                [47.6062, -122.3321],
+                {"bubblingMouseEvents": true, "color": "#2b9600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b9600ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 20.419963669082946, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_eed2732894ebb11bd0e63b5932afab5b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d44f71fa7b797a244b1fe32aea90e050 = $(`<div id="html_d44f71fa7b797a244b1fe32aea90e050" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Seattle</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>2,913</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>47.6062</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-122.3321</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>1.0%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_eed2732894ebb11bd0e63b5932afab5b.setContent(html_d44f71fa7b797a244b1fe32aea90e050);
+            
+        
+
+        circle_marker_c73dec929758c511a4fe7ea1ba7b3c31.bindPopup(popup_eed2732894ebb11bd0e63b5932afab5b)
+        ;
+
+        
+    
+    
+            circle_marker_c73dec929758c511a4fe7ea1ba7b3c31.bindTooltip(
+                `<div>
+                     Seattle: 2,913 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a0879a841ee8fd20ccd5d38d6c27f5be = L.circleMarker(
+                [38.9072, -77.0369],
+                {"bubblingMouseEvents": true, "color": "#ff3600ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ff3600ff", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 24.784500278489315, "stroke": true, "weight": 2}
+            ).addTo(marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3);
+        
+    
+        var popup_879c0c490b99743157e81b031dd2f9e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cce64fb24241c0da99e84002004de8ac = $(`<div id="html_cce64fb24241c0da99e84002004de8ac" style="width: 100.0%; height: 100.0%;">         <div style='width: 200px'>             <h4 style='margin-bottom: 10px; color: #2c3e50;'>Washington</h4>             <table style='width: 100%; border-collapse: collapse;'>                 <tr>                     <td style='padding: 5px;'><b>Patients:</b></td>                     <td style='padding: 5px;'>27,855</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Latitude:</b></td>                     <td style='padding: 5px;'>38.9072</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>Longitude:</b></td>                     <td style='padding: 5px;'>-77.0369</td>                 </tr>                 <tr>                     <td style='padding: 5px;'><b>% of Total:</b></td>                     <td style='padding: 5px;'>9.9%</td>                 </tr>             </table>         </div>         </div>`)[0];
+                popup_879c0c490b99743157e81b031dd2f9e9.setContent(html_cce64fb24241c0da99e84002004de8ac);
+            
+        
+
+        circle_marker_a0879a841ee8fd20ccd5d38d6c27f5be.bindPopup(popup_879c0c490b99743157e81b031dd2f9e9)
+        ;
+
+        
+    
+    
+            circle_marker_a0879a841ee8fd20ccd5d38d6c27f5be.bindTooltip(
+                `<div>
+                     Washington: 27,855 patients
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3.addTo(map_9d023f8b922481ea05a93c9ea088aa8c);
+        
+    
+            var heat_map_3650ebd84599c2ff37470d6e1b011968 = L.heatLayer(
+                [[30.2672, -97.7431, 8709.0], [39.2904, -76.6122, 2161.0], [42.3601, -71.0589, 2458.0], [35.2271, -80.8431, 8954.0], [41.8781, -87.6298, 31140.0], [39.9612, -82.9988, 6561.0], [32.7767, -96.797, 5139.0], [39.7392, -104.9903, 2736.0], [42.3314, -83.0458, 2348.0], [31.7619, -106.485, 2535.0], [32.7555, -97.3308, 3831.0], [29.7604, -95.3698, 27628.0], [39.7684, -86.1581, 3393.0], [30.3322, -81.6557, 5072.0], [36.1699, -115.1398, 11108.0], [34.0522, -118.2437, 14155.0], [38.2527, -85.7585, 4431.0], [35.1495, -90.049, 4626.0], [36.1627, -86.7816, 2603.0], [40.7128, -74.006, 29780.0], [35.4676, -97.5164, 15074.0], [39.9526, -75.1652, 5915.0], [33.4484, -112.074, 17586.0], [45.5051, -122.675, 271.0], [29.4241, -98.4936, 9204.0], [32.7157, -117.1611, 12462.0], [37.7749, -122.4194, 3195.0], [37.3382, -121.8863, 7086.0], [47.6062, -122.3321, 2913.0], [38.9072, -77.0369, 27855.0]],
+                {
+  "minOpacity": 0.3,
+  "maxZoom": 18,
+  "radius": 25,
+  "blur": 15,
+  "gradient": {
+  "0.4": "blue",
+  "0.65": "lime",
+  "1": "red",
+},
+}
+            );
+        
+    
+            heat_map_3650ebd84599c2ff37470d6e1b011968.addTo(map_9d023f8b922481ea05a93c9ea088aa8c);
+        
+    
+            var layer_control_96befd3f482b6011b18e18440a9441ee_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_b67b4e4d9f4f08cd8361a21f06cd10bf,
+                    "openstreetmap" : tile_layer_aa2d81d3ea328e6f87e372141061b821,
+                    "stamenterrain" : tile_layer_b5563d80b721213665809b1ed99856f9,
+                },
+                overlays :  {
+                    "macro_element_3ce4ab44e69f6c7a7fb58fa1adc3a3e3" : marker_cluster_3ce4ab44e69f6c7a7fb58fa1adc3a3e3,
+                    "macro_element_3650ebd84599c2ff37470d6e1b011968" : heat_map_3650ebd84599c2ff37470d6e1b011968,
+                },
+            };
+            let layer_control_96befd3f482b6011b18e18440a9441ee = L.control.layers(
+                layer_control_96befd3f482b6011b18e18440a9441ee_layers.base_layers,
+                layer_control_96befd3f482b6011b18e18440a9441ee_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_9d023f8b922481ea05a93c9ea088aa8c);
+
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_9d023f8b922481ea05a93c9ea088aa8c);
+        
+    
+            var measure_control_5598b7de398498c555aa55900e6abda6 = new L.Control.Measure(
+                {
+  "position": "topright",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_9d023f8b922481ea05a93c9ea088aa8c.addControl(measure_control_5598b7de398498c555aa55900e6abda6);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+</script>
+</html>

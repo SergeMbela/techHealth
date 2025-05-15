@@ -76,3 +76,6 @@ Thumbs.db
 
 anaconda3/envs/
 documentation/
+
+# === Exclude images ===
+.png
