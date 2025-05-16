@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Available Forms - eCRF System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">Available Forms</h1>
+        
+        {% if forms %}
+            <div class="row">
+                {% for form in forms %}
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ form[1] }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Version {{ form[2] }}</h6>
+                                <p class="card-text">{{ form[3] }}</p>
+                                <a href="{{ url_for('view_form', form_id=form[0]) }}" class="btn btn-primary">View Form</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No forms are currently available.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 

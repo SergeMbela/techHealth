@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}{{ form[0] }} - eCRF System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>{{ form[0] }}</h1>
+                <p class="text-muted">Version {{ form[1] }}</p>
+            </div>
+            <div>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Forms</a>
+                <a href="{{ url_for('form_data', form_id=form_id) }}" class="btn btn-info">
+                    <i class="bi bi-table"></i> View Data
+                </a>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Form Description</h5>
+                <p class="card-text">{{ form[2] }}</p>
+            </div>
+        </div>
+
+        {% for section_id, section in sections.items() %}
+            <div class="form-section">
+                <h3>{{ section.name }}</h3>
+                {% if section.description %}
+                    <p class="text-muted">{{ section.description }}</p>
+                {% endif %}
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Validation Rules</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for field in section.fields %}
+                                <tr>
+                                    <td>
+                                        {{ field.label }}
+                                        {% if field.required %}
+                                            <span class="required-field"></span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ field.type }}</td>
+                                    <td>
+                                        {% if field.required %}
+                                            <span class="badge bg-danger">Required</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Optional</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if field.validation %}
+                                            <small class="text-muted">{{ field.validation }}</small>
+                                        {% else %}
+                                            <small class="text-muted">None</small>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="mt-4">
+            <h3>Create New Form Instance</h3>
+            <form action="{{ url_for('new_form_instance', patient_id=1, form_id=form_id) }}" method="GET" class="row g-3">
+                <div class="col-md-6">
+                    <label for="patient_id" class="form-label">Patient ID</label>
+                    <input type="number" class="form-control" id="patient_id" name="patient_id" required>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Create New Instance</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 

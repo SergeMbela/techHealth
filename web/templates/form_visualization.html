@@ -1,0 +1,410 @@
+{% extends "base.html" %}
+
+{% block title %}{{ form_name }} Visualization - eCRF System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>{{ form_name }} Visualization</h1>
+            </div>
+            <div>
+                <a href="{{ url_for('form_data', form_id=form_id) }}" class="btn btn-secondary">Back to Data</a>
+            </div>
+        </div>
+
+        {% if field_data %}
+            <!-- Filter Controls -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Filter Options</h5>
+                    <form id="filterForm" class="row g-3">
+                        <div class="col-md-3">
+                            <label for="dateRange" class="form-label">Date Range</label>
+                            <select class="form-select" id="dateRange">
+                                <option value="all">All Time</option>
+                                <option value="1m">Last Month</option>
+                                <option value="3m">Last 3 Months</option>
+                                <option value="6m">Last 6 Months</option>
+                                <option value="1y">Last Year</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="chartType" class="form-label">Chart Type</label>
+                            <select class="form-select" id="chartType">
+                                <option value="line">Line Chart</option>
+                                <option value="bar">Bar Chart</option>
+                                <option value="scatter">Scatter Plot</option>
+                                <option value="box">Box Plot</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="statistics" class="form-label">Statistics</label>
+                            <select class="form-select" id="statistics">
+                                <option value="none">None</option>
+                                <option value="mean">Mean</option>
+                                <option value="median">Median</option>
+                                <option value="trend">Trend Line</option>
+                                <option value="all">All Statistics</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="anomalyDetection" class="form-label">Anomaly Detection</label>
+                            <select class="form-select" id="anomalyDetection">
+                                <option value="none">None</option>
+                                <option value="zscore">Z-Score</option>
+                                <option value="iqr">IQR Method</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Patient Comparison -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Patient Comparison</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="patient1" class="form-label">Patient 1</label>
+                            <select class="form-select" id="patient1">
+                                <option value="">Select Patient</option>
+                                {% for patient in patients %}
+                                    <option value="{{ patient.id }}">{{ patient.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="patient2" class="form-label">Patient 2</label>
+                            <select class="form-select" id="patient2">
+                                <option value="">Select Patient</option>
+                                {% for patient in patients %}
+                                    <option value="{{ patient.id }}">{{ patient.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="row">
+                {% for field_id, field in field_data.items() %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ field.label }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ field.section }}</h6>
+                                <canvas id="chart_{{ field_id }}" width="400" height="200"></canvas>
+                                
+                                <!-- Statistics Summary -->
+                                <div class="mt-3" id="stats_{{ field_id }}">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <small class="text-muted">Mean:</small>
+                                            <div id="mean_{{ field_id }}">-</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <small class="text-muted">Median:</small>
+                                            <div id="median_{{ field_id }}">-</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <small class="text-muted">Std Dev:</small>
+                                            <div id="stddev_{{ field_id }}">-</div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <small class="text-muted">IQR:</small>
+                                            <div id="iqr_{{ field_id }}">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Anomaly Summary -->
+                                <div class="mt-3" id="anomalies_{{ field_id }}" style="display: none;">
+                                    <div class="alert alert-warning">
+                                        <h6>Detected Anomalies</h6>
+                                        <div id="anomalyList_{{ field_id }}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No numeric data available for visualization.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-trendline"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const charts = {};
+    const originalData = {};
+
+    // Statistical functions
+    function calculateStatistics(values) {
+        const mean = values.reduce((a, b) => a + parseFloat(b), 0) / values.length;
+        const sortedValues = [...values].sort((a, b) => a - b);
+        const median = sortedValues.length % 2 === 0 
+            ? (sortedValues[sortedValues.length/2 - 1] + sortedValues[sortedValues.length/2]) / 2
+            : sortedValues[Math.floor(sortedValues.length/2)];
+        
+        // Standard deviation
+        const variance = values.reduce((a, b) => a + Math.pow(parseFloat(b) - mean, 2), 0) / values.length;
+        const stdDev = Math.sqrt(variance);
+        
+        // IQR
+        const q1 = sortedValues[Math.floor(sortedValues.length * 0.25)];
+        const q3 = sortedValues[Math.floor(sortedValues.length * 0.75)];
+        const iqr = q3 - q1;
+        
+        return { mean, median, stdDev, iqr, q1, q3 };
+    }
+
+    function detectAnomalies(values, dates, method) {
+        const stats = calculateStatistics(values);
+        const anomalies = [];
+        
+        if (method === 'zscore') {
+            values.forEach((value, i) => {
+                const zScore = Math.abs((value - stats.mean) / stats.stdDev);
+                if (zScore > 2) { // More than 2 standard deviations
+                    anomalies.push({
+                        date: dates[i],
+                        value: value,
+                        zScore: zScore
+                    });
+                }
+            });
+        } else if (method === 'iqr') {
+            const lowerBound = stats.q1 - 1.5 * stats.iqr;
+            const upperBound = stats.q3 + 1.5 * stats.iqr;
+            
+            values.forEach((value, i) => {
+                if (value < lowerBound || value > upperBound) {
+                    anomalies.push({
+                        date: dates[i],
+                        value: value,
+                        type: value < lowerBound ? 'low' : 'high'
+                    });
+                }
+            });
+        }
+        
+        return anomalies;
+    }
+
+    // Initialize charts and store original data
+    {% for field_id, field in field_data.items() %}
+        const ctx_{{ field_id }} = document.getElementById('chart_{{ field_id }}').getContext('2d');
+        const dates = {{ field.data|map(attribute=0)|list|tojson }};
+        const values = {{ field.data|map(attribute=1)|list|tojson }};
+        
+        originalData['{{ field_id }}'] = {
+            dates: dates,
+            values: values
+        };
+
+        // Calculate and display statistics
+        const stats = calculateStatistics(values);
+        document.getElementById('mean_{{ field_id }}').textContent = stats.mean.toFixed(2);
+        document.getElementById('median_{{ field_id }}').textContent = stats.median.toFixed(2);
+        document.getElementById('stddev_{{ field_id }}').textContent = stats.stdDev.toFixed(2);
+        document.getElementById('iqr_{{ field_id }}').textContent = stats.iqr.toFixed(2);
+
+        // Create initial chart
+        charts['{{ field_id }}'] = new Chart(ctx_{{ field_id }}, {
+            type: 'line',
+            data: {
+                labels: dates.map(date => new Date(date).toLocaleDateString()),
+                datasets: [{
+                    label: '{{ field.label }}',
+                    data: values,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: '{{ field.label }} Over Time'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.y !== null) {
+                                    label += context.parsed.y;
+                                    {% if field.validation.unit %}
+                                        label += ' {{ field.validation.unit }}';
+                                    {% endif %}
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        {% if field.validation.min is defined %}
+                        min: {{ field.validation.min }},
+                        {% endif %}
+                        {% if field.validation.max is defined %}
+                        max: {{ field.validation.max }},
+                        {% endif %}
+                        title: {
+                            display: true,
+                            text: '{% if field.validation.unit %}{{ field.validation.unit }}{% else %}Value{% endif %}'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    }
+                }
+            }
+        });
+    {% endfor %}
+
+    // Filter form event listeners
+    document.getElementById('dateRange').addEventListener('change', updateCharts);
+    document.getElementById('chartType').addEventListener('change', updateCharts);
+    document.getElementById('statistics').addEventListener('change', updateCharts);
+    document.getElementById('anomalyDetection').addEventListener('change', updateCharts);
+    document.getElementById('patient1').addEventListener('change', updateCharts);
+    document.getElementById('patient2').addEventListener('change', updateCharts);
+
+    function updateCharts() {
+        const dateRange = document.getElementById('dateRange').value;
+        const chartType = document.getElementById('chartType').value;
+        const statistics = document.getElementById('statistics').value;
+        const anomalyDetection = document.getElementById('anomalyDetection').value;
+        const patient1 = document.getElementById('patient1').value;
+        const patient2 = document.getElementById('patient2').value;
+
+        Object.keys(charts).forEach(fieldId => {
+            const data = originalData[fieldId];
+            let filteredDates = [...data.dates];
+            let filteredValues = [...data.values];
+
+            // Apply date filter
+            if (dateRange !== 'all') {
+                const now = new Date();
+                const cutoff = new Date();
+                switch(dateRange) {
+                    case '1m': cutoff.setMonth(now.getMonth() - 1); break;
+                    case '3m': cutoff.setMonth(now.getMonth() - 3); break;
+                    case '6m': cutoff.setMonth(now.getMonth() - 6); break;
+                    case '1y': cutoff.setFullYear(now.getFullYear() - 1); break;
+                }
+                
+                const filtered = filteredDates.map((date, i) => ({
+                    date: new Date(date),
+                    value: filteredValues[i]
+                })).filter(item => item.date >= cutoff);
+
+                filteredDates = filtered.map(item => item.date);
+                filteredValues = filtered.map(item => item.value);
+            }
+
+            // Update chart type
+            charts[fieldId].config.type = chartType;
+            
+            // Update data
+            charts[fieldId].data.labels = filteredDates.map(date => date.toLocaleDateString());
+            charts[fieldId].data.datasets = [{
+                label: '{{ field.label }}',
+                data: filteredValues,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1,
+                fill: false
+            }];
+
+            // Add statistics if selected
+            if (statistics !== 'none') {
+                const stats = calculateStatistics(filteredValues);
+                
+                if (statistics === 'mean' || statistics === 'all') {
+                    charts[fieldId].data.datasets.push({
+                        label: 'Mean',
+                        data: Array(filteredDates.length).fill(stats.mean),
+                        borderColor: 'rgb(255, 99, 132)',
+                        borderDash: [5, 5],
+                        fill: false
+                    });
+                }
+                
+                if (statistics === 'median' || statistics === 'all') {
+                    charts[fieldId].data.datasets.push({
+                        label: 'Median',
+                        data: Array(filteredDates.length).fill(stats.median),
+                        borderColor: 'rgb(54, 162, 235)',
+                        borderDash: [5, 5],
+                        fill: false
+                    });
+                }
+                
+                if (statistics === 'trend' || statistics === 'all') {
+                    charts[fieldId].data.datasets.push({
+                        label: 'Trend',
+                        data: filteredValues,
+                        type: 'line',
+                        borderColor: 'rgb(255, 159, 64)',
+                        fill: false,
+                        trendlineLinear: {
+                            colorMin: 'rgb(255, 159, 64)',
+                            colorMax: 'rgb(255, 159, 64)',
+                            lineStyle: 'dashed',
+                            width: 2
+                        }
+                    });
+                }
+            }
+
+            // Detect and display anomalies
+            if (anomalyDetection !== 'none') {
+                const anomalies = detectAnomalies(filteredValues, filteredDates, anomalyDetection);
+                const anomalyElement = document.getElementById('anomalies_' + fieldId);
+                const anomalyList = document.getElementById('anomalyList_' + fieldId);
+                
+                if (anomalies.length > 0) {
+                    anomalyElement.style.display = 'block';
+                    anomalyList.innerHTML = anomalies.map(a => `
+                        <div>
+                            ${new Date(a.date).toLocaleDateString()}: 
+                            ${a.value.toFixed(2)}
+                            {% if field.validation.unit %}{{ field.validation.unit }}{% endif %}
+                            ${a.zScore ? `(Z-Score: ${a.zScore.toFixed(2)})` : 
+                              a.type === 'low' ? '(Below Range)' : '(Above Range)'}
+                        </div>
+                    `).join('');
+                } else {
+                    anomalyElement.style.display = 'none';
+                }
+            } else {
+                document.getElementById('anomalies_' + fieldId).style.display = 'none';
+            }
+
+            charts[fieldId].update();
+        });
+    }
+});
+</script>
+{% endblock %} 

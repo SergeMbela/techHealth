@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Select Patients for Comparison - {{ form_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>Compare Patients - {{ form_name }}</h1>
+                <a href="{{ url_for('form_data', form_id=form_id) }}" class="btn btn-secondary">Back to Data</a>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('compare_patients', form_id=form_id) }}">
+                        <div class="mb-4">
+                            <label class="form-label">Select Patients to Compare</label>
+                            <div class="row">
+                                {% for patient in patients %}
+                                <div class="col-md-4 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" 
+                                               name="patient_ids" value="{{ patient.id }}" 
+                                               id="patient_{{ patient.id }}">
+                                        <label class="form-check-label" for="patient_{{ patient.id }}">
+                                            {{ patient.name }}
+                                        </label>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="date_range" class="form-label">Date Range</label>
+                            <select class="form-select" id="date_range" name="date_range">
+                                <option value="all">All Time</option>
+                                <option value="1m">Last Month</option>
+                                <option value="3m">Last 3 Months</option>
+                                <option value="6m">Last 6 Months</option>
+                                <option value="1y">Last Year</option>
+                            </select>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            Select at least two patients to compare their data. The comparison will show:
+                            <ul class="mb-0 mt-2">
+                                <li>Side-by-side charts for each numeric field</li>
+                                <li>Statistical comparisons between patients</li>
+                                <li>Trend analysis and anomaly detection</li>
+                            </ul>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Compare Patients</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    
+    form.addEventListener('submit', function(e) {
+        const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+        if (checked.length < 2) {
+            e.preventDefault();
+            alert('Please select at least two patients to compare.');
+        }
+    });
+});
+</script>
+{% endblock %} 

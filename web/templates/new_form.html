@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}New Form Instance - eCRF System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>New Form Instance</h1>
+                <p class="text-muted">Patient: {{ patient[0] }} {{ patient[1] }}</p>
+            </div>
+            <div>
+                <a href="{{ url_for('view_form', form_id=form_id) }}" class="btn btn-secondary">Back to Form</a>
+            </div>
+        </div>
+
+        <form method="POST" class="needs-validation" novalidate>
+            <input type="hidden" name="created_by" value="Dr. Smith">
+            
+            {% for section_id, section in sections.items() %}
+                <div class="form-section">
+                    <h3>{{ section.name }}</h3>
+                    {% if section.description %}
+                        <p class="text-muted">{{ section.description }}</p>
+                    {% endif %}
+
+                    {% for field in section.fields %}
+                        <div class="form-field">
+                            <label for="field_{{ field.id }}" class="form-label {% if field.required %}required-field{% endif %}">
+                                {{ field.label }}
+                            </label>
+
+                            {% if field.type == 'number' %}
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="field_{{ field.id }}" 
+                                       name="field_{{ field.id }}"
+                                       {% if field.required %}required{% endif %}
+                                       {% if field.validation %}
+                                           {% set validation = field.validation|from_json %}
+                                           {% if validation.min is defined %}min="{{ validation.min }}"{% endif %}
+                                           {% if validation.max is defined %}max="{{ validation.max }}"{% endif %}
+                                       {% endif %}
+                                       step="any">
+                                {% if field.validation %}
+                                    {% set validation = field.validation|from_json %}
+                                    {% if validation.unit %}
+                                        <div class="form-text">Unit: {{ validation.unit }}</div>
+                                    {% endif %}
+                                {% endif %}
+
+                            {% elif field.type == 'boolean' %}
+                                <div class="form-check">
+                                    <input type="checkbox" 
+                                           class="form-check-input" 
+                                           id="field_{{ field.id }}" 
+                                           name="field_{{ field.id }}"
+                                           value="true">
+                                    <label class="form-check-label" for="field_{{ field.id }}">Yes</label>
+                                </div>
+
+                            {% elif field.type == 'multiselect' %}
+                                {% set validation = field.validation|from_json %}
+                                <select class="form-select" 
+                                        id="field_{{ field.id }}" 
+                                        name="field_{{ field.id }}"
+                                        {% if field.required %}required{% endif %}
+                                        multiple>
+                                    {% for option in validation.options %}
+                                        <option value="{{ option }}">{{ option }}</option>
+                                    {% endfor %}
+                                </select>
+
+                            {% else %}
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="field_{{ field.id }}" 
+                                       name="field_{{ field.id }}"
+                                       {% if field.required %}required{% endif %}>
+                            {% endif %}
+
+                            {% if field.validation %}
+                                <div class="invalid-feedback">
+                                    Please provide a valid value for this field.
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">Submit Form</button>
+                <a href="{{ url_for('view_form', form_id=form_id) }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Form validation
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
+{% endblock %} 

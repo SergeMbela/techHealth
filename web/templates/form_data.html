@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}{{ form[0] }} Data - eCRF System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1>{{ form[0] }} Data</h1>
+                <p class="text-muted">Version {{ form[1] }}</p>
+            </div>
+            <div>
+                <a href="{{ url_for('view_form', form_id=form_id) }}" class="btn btn-secondary">Back to Form</a>
+                <a href="{{ url_for('export_form_data', form_id=form_id) }}" class="btn btn-success">
+                    <i class="bi bi-download"></i> Export to CSV
+                </a>
+                <a href="{{ url_for('visualize_form_data', form_id=form_id) }}" class="btn btn-info">
+                    <i class="bi bi-graph-up"></i> Visualize Data
+                </a>
+            </div>
+        </div>
+
+        {% if instances %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Instance ID</th>
+                            <th>Patient</th>
+                            <th>Visit Date</th>
+                            <th>Status</th>
+                            <th>Created By</th>
+                            <th>Created Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for instance in instances %}
+                            <tr>
+                                <td>{{ instance[0] }}</td>
+                                <td>
+                                    {{ instance[2] }} {{ instance[3] }}
+                                    <small class="text-muted">(ID: {{ instance[1] }})</small>
+                                </td>
+                                <td>{{ instance[4].strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>
+                                    {% if instance[5] == 'Completed' %}
+                                        <span class="badge bg-success">Completed</span>
+                                    {% elif instance[5] == 'In Progress' %}
+                                        <span class="badge bg-warning">In Progress</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">{{ instance[5] }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ instance[6] }}</td>
+                                <td>{{ instance[7].strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>
+                                    <a href="{{ url_for('view_form_instance', instance_id=instance[0]) }}" 
+                                       class="btn btn-sm btn-primary">
+                                        View Details
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No form instances found for this form.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %} 
